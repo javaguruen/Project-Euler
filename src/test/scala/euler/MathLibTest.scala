@@ -27,4 +27,18 @@ class MathLibTest extends AssertionsForJUnit {
     assert(15 === MathLib.hexagonal( 3 ))
     assert(40755 === MathLib.hexagonal( 143 ))
   }
+
+
+
+  @Test
+  def primesInRangeTest(){
+    val primes: List[Int] = MathLib.allPrimesInRange(6)
+    assert( List(2,3, 5) === primes)
+  }
+
+  @Test
+  def isPrimeFastIncludes2(){
+    assert( true === MathLib.isPrimeFast(3))
+    assert( true === MathLib.isPrimeFast(2))
+  }
 }

@@ -50,7 +50,13 @@ object MathLib {
 
   def isPrime(tall: Long) = allFactors(tall).isEmpty
 
-  def isPrimeFast(tall: Long) = !hasFactor(tall) && tall>1
+  def isPrimeFast(tall: Long) = (tall == 2 || (!hasFactor(tall) && tall>1))
+
+  def allPrimesInRange(primeMax: Int) : List[Int] = {
+    val result = List.range(2, primeMax)
+    val primes = result.filter( isPrimeFast( _ ))
+    primes
+  }
 
   def triangleNumber(tall: Long): Long = {
     tall * (tall + 1) / 2
@@ -70,6 +76,41 @@ object MathLib {
 
   def tverrsum(tall: String): Int = {
     tall.foldLeft(0)(_ + _.toInt - '0'.toInt)
+  }
+
+   def isPermutation(a: Int, b: Int): scala.Boolean = {
+    if (a == b) return false
+
+    var strA = a.toString
+    var strB = b.toString
+
+    if  (strA.size==3){
+      strA = "0" + strA
+    }
+    if  (strB.size==3){
+      strB = "0" + strB
+    }
+
+    var manglerTegn = false
+    strA.foreach {
+      i => if (!strB.contains(i)) {
+        manglerTegn = true
+      }
+      else{
+        strB = strB.replace(i, ' ')
+      }
+    }
+    strB = b.toString
+    strB.foreach {
+      i => if (!strA.contains(i)) {
+        manglerTegn = true
+      }
+      else{
+        strA = strA.replace(i, ' ')
+      }
+    }
+
+    !manglerTegn
   }
 
   def properDevisors(n: Int): java.util.List[Int] = {

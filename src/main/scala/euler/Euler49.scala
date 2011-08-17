@@ -1,28 +1,30 @@
 package euler
 
 import collection.mutable.HashMap
-import dbc.datatype.Boolean
+import util.Sorting
+import euler.MathLib
 
 class Euler49 {
   var primes: List[Int] = Nil
   var permutasjoner = new HashMap[Int, List[Int]]
 
-  def run(): Long = {
+   def run(): Long = {
 
     var threePermutable: List[Int] = Nil
 
     for (n <- 1001 to 9999 by 2) {
       if (MathLib.isPrimeFast(n)) {
         primes = n :: primes
-        permutasjoner += n -> Nil
+        permutasjoner += n -> List(n)
       }
     }
     println("primes=" + primes)
+
     primes.foreach {
       a : Int =>
         primes.foreach {
           b : Int =>
-            if (isPermutation(a, b)) {
+            if (MathLib.isPermutation(a, b)) {
                 var liste : List[Int] = permutasjoner(a)
                 liste = b :: liste
                 permutasjoner += a -> liste
@@ -30,64 +32,46 @@ class Euler49 {
         }
     }
     println("Permutasjoner totalt = " + permutasjoner.size)
+
     permutasjoner = permutasjoner.filter{ case (k,v) => v.size >= 3 }
     println("Permutasjoner > 3 = " + permutasjoner.size)
+
     permutasjoner = permutasjoner.filter{ case (k,v) => has3Diff(v) }
     println("Permutasjoner 3+diff = " + permutasjoner.size)
     permutasjoner.foreach{ m =>
         println("Perm(" + m._1 + "=" + m._2)
     }
+
     permutasjoner.size
   }
 
   def has3Diff( aList : List[Int] ) : scala.Boolean = {
-    var allDiffs = new HashMap[Int, (Int,Int)]
+    var allDiffs = new HashMap[Int, List[Int] ]
     for (i <- 0 until aList.size-1) {
       for (j <- i+1 until aList.size) {
         val a : Int = aList(i)
         val b : Int = aList(j)
-        val diff = b-a
+        val diff = (b-a).abs
+        if (diff < 0) println("-------------------< 0")
         if  ( allDiffs.contains(diff)){
-          val tidligere = allDiffs(diff)
-          if ( tidligere._1 == a || tidligere._1 == b || tidligere._2 == a || tidligere._2 == b){
-            println("a=" + a + " b=" + b + " har diff=" + diff)
-            println("  funnet for " + tidligere._1 + " og " + tidligere._2)
-            println ("*************")
-          }
+          var tidligere = allDiffs(diff)
+          if ( !tidligere.contains( a ) ){
+            tidligere = a :: tidligere
+           }
+          if ( !tidligere.contains( b ) ){
+            tidligere = b :: tidligere
+           }
+          allDiffs += diff -> tidligere
         }
-        allDiffs += diff -> (a,b)
+        else{
+          allDiffs += diff -> List(a,b)
+        }
       }
     }
-    val sizeBefore = allDiffs.size
-    val sizeAfter  = allDiffs.toSet.size
-    (sizeBefore-sizeAfter) >= 2
+
+    allDiffs = allDiffs.filter{ case (k,v) => v.toSet.size > 2 }
+    allDiffs.size > 1
   }
 
-  def isPermutation(a: Int, b: Int): scala.Boolean = {
-    if (a == b) return false
 
-    var strA = a.toString
-    var strB = b.toString
-
-    var manglerTegn = false
-    strA.foreach {
-      i => if (!strB.contains(i)) {
-        manglerTegn = true
-      }
-      else{
-        strB = strB.replace(i, ' ')
-      }
-    }
-    strB = b.toString
-    strB.foreach {
-      i => if (!strA.contains(i)) {
-        manglerTegn = true
-      }
-      else{
-        strA = strA.replace(i, ' ')
-      }
-    }
-
-    !manglerTegn
-  }
 }
