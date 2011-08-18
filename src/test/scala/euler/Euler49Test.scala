@@ -16,6 +16,7 @@ class Euler49Test extends AssertionsForJUnit {
   def isPermutasjonTest() {
     assert( true == MathLib.isPermutation(1234, 4321))
   }
+
   @Test
   def isPermutasjonLeadingZeroTest() {
     assert( true == MathLib.isPermutation(234, 4320))

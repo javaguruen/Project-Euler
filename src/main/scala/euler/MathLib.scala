@@ -97,7 +97,7 @@ object MathLib {
         manglerTegn = true
       }
       else{
-        strB = strB.replace(i, ' ')
+        strB = strB.replaceFirst(i.toString, " ")
       }
     }
     strB = b.toString
@@ -106,7 +106,7 @@ object MathLib {
         manglerTegn = true
       }
       else{
-        strA = strA.replace(i, ' ')
+        strA = strA.replaceFirst(i.toString, " ")
       }
     }
 

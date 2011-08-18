@@ -18,9 +18,24 @@ public class Euler21Test {
     assertTrue( devisorer.size() == 1 );
     assertTrue( devisorer.contains( 1 ) );
   }
+
   @Test
   public void d2() {
     List devisorer = MathLib.properDevisors(2);
+    assertTrue( devisorer.size() == 1 );
+    assertTrue( devisorer.contains( 1 ) );
+  }
+
+  @Test
+  public void d3() {
+    List devisorer = MathLib.properDevisors(3);
+    assertTrue( devisorer.size() == 1 );
+    assertTrue( devisorer.contains( 1 ) );
+  }
+
+  @Test
+  public void d4() {
+    List devisorer = MathLib.properDevisors(4);
     assertTrue( devisorer.size() == 2 );
     assertTrue( devisorer.contains( 1 ) );
     assertTrue( devisorer.contains( 2 ) );

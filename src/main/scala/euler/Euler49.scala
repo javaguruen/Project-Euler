@@ -1,77 +1,70 @@
 package euler
 
 import collection.mutable.HashMap
-import util.Sorting
-import euler.MathLib
 
 class Euler49 {
-  var primes: List[Int] = Nil
-  var permutasjoner = new HashMap[Int, List[Int]]
 
-   def run(): Long = {
-
-    var threePermutable: List[Int] = Nil
-
+  def findPrimesInRange: scala.List[Int] = {
+    var primes: List[Int] = Nil
     for (n <- 1001 to 9999 by 2) {
       if (MathLib.isPrimeFast(n)) {
         primes = n :: primes
-        permutasjoner += n -> List(n)
       }
     }
-    println("primes=" + primes)
+    primes
+  }
 
+  def permuteAllNumbers(primes: List[Int]): HashMap[Int, List[Int]] = {
+    var permutasjoner = new HashMap[Int, List[Int]]
     primes.foreach {
-      a : Int =>
+      a: Int =>
+        var liste: List[Int] = a :: Nil
         primes.foreach {
-          b : Int =>
+          b: Int =>
             if (MathLib.isPermutation(a, b)) {
-                var liste : List[Int] = permutasjoner(a)
-                liste = b :: liste
-                permutasjoner += a -> liste
+              liste = b :: liste
             }
         }
+        permutasjoner += a -> liste
     }
+    permutasjoner
+  }
+
+  def runAlterativ(): Long = {
+    for (n <- 1489 until (10000-2*3330) by 2) {
+      val o = (n + 3330)
+      val p = (o + 3330)
+      if (MathLib.isPrimeFast(n) && MathLib.isPrimeFast(o) && MathLib.isPrimeFast(p)) {
+        println("3 primes: " + n + ", " + o + ", " + p)
+      }
+    }
+    2
+  }
+
+  def run(): Long = {
+    val primes = findPrimesInRange
+    println("primes=" + primes)
+
+    var permutasjoner = permuteAllNumbers(primes)
     println("Permutasjoner totalt = " + permutasjoner.size)
+    println("Permutasjoner 2969 = " + permutasjoner(2969))
 
-    permutasjoner = permutasjoner.filter{ case (k,v) => v.size >= 3 }
-    println("Permutasjoner > 3 = " + permutasjoner.size)
-
-    permutasjoner = permutasjoner.filter{ case (k,v) => has3Diff(v) }
-    println("Permutasjoner 3+diff = " + permutasjoner.size)
-    permutasjoner.foreach{ m =>
-        println("Perm(" + m._1 + "=" + m._2)
+    permutasjoner.foreach {
+      case (key, values) =>
+        val sortedListOfPermutations = values.sortWith((e1, e2) => (e1 < e2))
+        for (i <- 0 until sortedListOfPermutations.size - 1) {
+          for (j <- i + 1 until sortedListOfPermutations.size - 1) {
+            val diff = sortedListOfPermutations(j) - sortedListOfPermutations(i)
+            val possibleValue = sortedListOfPermutations(j) + diff
+            if (sortedListOfPermutations.contains(possibleValue)) {
+              println("******* SOLUTION ********")
+              println("prime=" + key + " [" + sortedListOfPermutations(i) + ", " + sortedListOfPermutations(j) + ", " + possibleValue + "]")
+              println("prime=" + key + " perms=" + sortedListOfPermutations)
+            }
+          }
+        }
     }
 
     permutasjoner.size
   }
-
-  def has3Diff( aList : List[Int] ) : scala.Boolean = {
-    var allDiffs = new HashMap[Int, List[Int] ]
-    for (i <- 0 until aList.size-1) {
-      for (j <- i+1 until aList.size) {
-        val a : Int = aList(i)
-        val b : Int = aList(j)
-        val diff = (b-a).abs
-        if (diff < 0) println("-------------------< 0")
-        if  ( allDiffs.contains(diff)){
-          var tidligere = allDiffs(diff)
-          if ( !tidligere.contains( a ) ){
-            tidligere = a :: tidligere
-           }
-          if ( !tidligere.contains( b ) ){
-            tidligere = b :: tidligere
-           }
-          allDiffs += diff -> tidligere
-        }
-        else{
-          allDiffs += diff -> List(a,b)
-        }
-      }
-    }
-
-    allDiffs = allDiffs.filter{ case (k,v) => v.toSet.size > 2 }
-    allDiffs.size > 1
-  }
-
-
 }
