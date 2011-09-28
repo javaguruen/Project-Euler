@@ -8,7 +8,7 @@ class Euler44 {
     var minsteDiff = Long.MaxValue
     //myMap += ( sum -> sum)
     for( n <- 1 to maksForsoek){
-      val pn = MathLib.pentagonal(n)
+      val pn : Long = MathLib.pentagonal(n)
       if( pn < 0) println (" FOR STORT TALL")
       //println(" P(" + n +")=" + pn )
       alleP += (pn -> n )

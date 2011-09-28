@@ -37,6 +37,12 @@ class MathLibTest extends AssertionsForJUnit {
   }
 
   @Test
+  def fakultet0Test(){
+    val fak0 = MathLib.fakultet(0)
+    assert( 1L === fak0)
+  }
+
+  @Test
   def primesInRangeTest() {
     val primes: List[Int] = MathLib.allPrimesInRange(6)
     assert(List(2, 3, 5) === primes)
@@ -51,5 +57,10 @@ class MathLibTest extends AssertionsForJUnit {
   @Test
   def isPermutation() {
     assert(true === MathLib.isPermutation(2969, 9629))
+  }
+
+  @Test
+  def select3from5(){
+    assert( 10 === MathLib.selectRfromN(3, 5) )
   }
 }

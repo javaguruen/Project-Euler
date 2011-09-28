@@ -3,8 +3,30 @@ package euler
 import scala.collection.mutable
 import scala.collection.JavaConversions._
 import scala.collection.mutable.ListBuffer
+import java.lang.Long
+import java.math.BigInteger
 
 object MathLib {
+
+  def selectRfromN(r: Int, n: Int): BigInt = {
+    val teller = fakultet(n)
+    val nevner = fakultet(r) * fakultet(n-r)
+/*
+    if( teller.toLong <= 0){
+      println ("Teller negativ")
+    }
+    if( nevner.toLong <= 0){
+      println ("Nevner negativ")
+    }
+*/
+    val retur = (teller / nevner)
+    if( retur <= new BigInt( new BigInteger("0")) ){
+      println ("Retur negativ for r=" + r + " n=" + n)
+    }
+    retur
+  }
+
+
   def allFactors(tall: Long): List[Long] = {
     var factors: List[Long] = Nil
     var max = scala.math.ceil(scala.math.sqrt(tall.doubleValue))
@@ -63,12 +85,12 @@ object MathLib {
   }
 
   def fakultet(n: Int): BigInt = {
-    if (n == 1) {
+    if (n <= 1) {
       return 1
     }
     else {
       var p: BigInt = fakultet(n - 1) * n
-      println(p);
+//      println(p);
       return p
     }
   }
