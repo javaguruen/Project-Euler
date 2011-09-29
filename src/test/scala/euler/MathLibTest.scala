@@ -63,4 +63,19 @@ class MathLibTest extends AssertionsForJUnit {
   def select3from5(){
     assert( 10 === MathLib.selectRfromN(3, 5) )
   }
+  
+  @Test
+  def palindromeTest(){
+    assert( true === MathLib.isPalindrome( 121 ) )
+    assert( true === MathLib.isPalindrome( 2 ) )
+    assert( false === MathLib.isPalindrome( 12 ) )
+    assert( true === MathLib.isPalindrome( 12 ) )
+    assert( false === MathLib.isPalindrome( 12 ) )
+  }
+  
+  @Test
+  def lychrelNumberTest(){
+    assert( false === MathLib.isLychrelNumber(3))
+    assert( true === MathLib.isLychrelNumber( 10677 ))
+  }
 }

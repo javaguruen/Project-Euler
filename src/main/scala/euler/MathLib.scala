@@ -177,5 +177,37 @@ object MathLib {
     }
     return maps.keys.size == tall.length
   }
+
+  def isPalindrome ( candidate : Int) : Boolean = {
+    val str = ""+candidate
+    return str.equalsIgnoreCase(str.reverse)
+  }
+
+  def isPalindrome ( candidate : BigInt) : Boolean = {
+    val str = candidate.toString()
+    str.equalsIgnoreCase(str.reverse)
+  }
+
+  def reverseAndAdd(tall: Int): Int = {
+    val reversed = tall.toString.reverse.toInt
+    tall + reversed
+  }
+
+  def reverseAndAdd(tall: BigInt): BigInt = {
+    val reversed = new BigInt( new BigInteger(tall.toString.reverse))
+    tall + reversed
+  }
+
   
+  def isLychrelNumber(candidate : Int) : Boolean = {
+    var sum = new BigInt( new BigInteger( candidate.toString ) )
+    for ( i <- 1 until 50){
+      sum = MathLib.reverseAndAdd( sum )
+      if ( isPalindrome( sum ) ){
+        println ("Candidate " + candidate + " is palindrome (" + sum + " after " + i + " reverseAndAdd")
+        return false
+      }
+    }
+    true
+  }
 }

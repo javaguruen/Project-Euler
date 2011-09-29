@@ -3,7 +3,7 @@ package euler
 class Euler53 {
 
 
-  def velgAlleTall(maxR: Int, maxN: Int) : List[BigInt] = {
+  def velgAlleTall(maxR: Int, maxN: Int) : List[BigInt  ] = {
     assert(maxR <= maxN)
     var list :  List [BigInt] = Nil
 
