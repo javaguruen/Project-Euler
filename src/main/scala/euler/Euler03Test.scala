@@ -1,7 +1,7 @@
 package euler
 
 import org.junit._
-import Assert._
+//import Assert._
 
 class Euler03Test{
  /* @Test

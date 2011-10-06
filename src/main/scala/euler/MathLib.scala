@@ -210,4 +210,18 @@ object MathLib {
     }
     true
   }
+  
+  def bigPow(base : Int,  exponent :Int ) : BigInt = {
+    val bigBase : BigInt = new BigInt ( new BigInteger ( base.toString ) )
+    var result : BigInt =  bigBase
+    for ( i <- 1 until exponent) {
+      result = result.*( bigBase )
+    }
+    result
+  }
+
+  def bigTverrsum(tall : BigInt ) : Int = {
+    tall.toString().foldLeft(0){ (sum, tegn) => sum + (tegn.toInt - '0'.toInt) }
+  }
+
 }
