@@ -21,20 +21,24 @@ class Euler58 {
   
   
   def run() : Int = {
-    var diagonals : List[Int] = 1 :: Nil
     var sideLength = 1
     var forrigeMaks = 1
-    var forholdPrimtall = 100f
+    var forholdPrimtall = 100.0
     var antPrimtall = 0
-    while( forholdPrimtall > 10f){
+    var antallTall = 1 //tallet 1
+    var printGrense = 100.0
+    while( forholdPrimtall > 10.0){
       sideLength += 2
       val newDiagoanls = getDiagonalValuesForSidelengthGivenStartValue( sideLength, forrigeMaks)
-      diagonals = newDiagoanls ::: diagonals
-
       val antallNyePrimtall = antallPrimtall( newDiagoanls )
       antPrimtall += antallNyePrimtall
-      val antallTall = diagonals.size
-       forholdPrimtall = (antPrimtall.toFloat/antallTall)*100.0f
+      antallTall += 4
+      forholdPrimtall = (antPrimtall.toFloat/antallTall)*100.0
+      if  (forholdPrimtall < printGrense ){
+        println("Sidelengde=" + sideLength + " primtall: " + antPrimtall + " antallTall: " + antallTall)
+        println("\tForholdstall=" + forholdPrimtall)
+        printGrense = scala.math.floor( forholdPrimtall )
+      }
     }
     sideLength
   }
