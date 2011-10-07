@@ -39,6 +39,7 @@ class Euler58 {
         println("\tForholdstall=" + forholdPrimtall)
         printGrense = scala.math.floor( forholdPrimtall )
       }
+      forrigeMaks = newDiagoanls(3)
     }
     sideLength
   }
