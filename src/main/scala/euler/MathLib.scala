@@ -8,6 +8,9 @@ import java.math.BigInteger
 
 object MathLib {
 
+  def summer(liste : List[Long] ) : Long = liste.foldLeft(0l) { (s, e) => s + e } 
+
+
   def selectRfromN(r: Int, n: Int): BigInt = {
     val teller = fakultet(n)
     val nevner = fakultet(r) * fakultet(n-r)
@@ -26,7 +29,29 @@ object MathLib {
     retur
   }
 
+  /**
+   * Alle faktorene (inkludert 1) som tall er delelig på, men ikke tallet selv.
+   */
+  def properDivisors(tall: Long): List[Long] = {
+    var factors: List[Long] = 1 :: Nil
+    var max = scala.math.ceil(scala.math.sqrt(tall.doubleValue))
+    var i = 2
 
+    do {
+      val divisor: Long = tall % i
+      if (divisor == 0) {
+        factors = (tall/i) :: factors
+        factors = i :: factors
+      }
+      i += 1
+    } while (i <= max)
+    factors = factors.sortWith( (a,b) => a<b)
+    factors = factors.removeDuplicates
+    factors
+  }
+
+
+  @Deprecated()
   def allFactors(tall: Long): List[Long] = {
     var factors: List[Long] = Nil
     var max = scala.math.ceil(scala.math.sqrt(tall.doubleValue))
@@ -224,4 +249,10 @@ object MathLib {
     tall.toString().foldLeft(0){ (sum, tegn) => sum + (tegn.toInt - '0'.toInt) }
   }
 
+  def triangleAreaBySideLengths(a: Int,  b : Int,  c : Int) : Double = {
+    //Hero's (or Heron's formule (http://www.wikihow.com/Calculate-the-Area-of-a-Triangle)
+    val s = (a + b + c) / 2.0
+
+    scala.math.sqrt( s * (s-a) * (s-b) * (s-c) )
+  }
 }

@@ -69,13 +69,22 @@ class MathLibTest extends AssertionsForJUnit {
     assert( true === MathLib.isPalindrome( 121 ) )
     assert( true === MathLib.isPalindrome( 2 ) )
     assert( false === MathLib.isPalindrome( 12 ) )
-    assert( true === MathLib.isPalindrome( 12 ) )
-    assert( false === MathLib.isPalindrome( 12 ) )
   }
   
   @Test
   def lychrelNumberTest(){
     assert( false === MathLib.isLychrelNumber(3))
     assert( true === MathLib.isLychrelNumber( 10677 ))
+  }
+
+  @Test
+  def faktorer(){
+    assert( List(1, 2, 4, 7, 14) === MathLib.properDivisors(28l) )
+    assert( List(1, 3) === MathLib.properDivisors(9) )
+  }
+
+  @Test
+  def triangleAreaBySideLengthsTest(){
+    assert( 12 === MathLib.triangleAreaBySideLengths (5, 5, 6))
   }
 }

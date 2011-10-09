@@ -20,11 +20,6 @@ class Euler58Test extends AssertionsForJUnit {
   }
 
   @Test
-  def incrementalFor0(){
-    assert( 1 === euler58.getIncrementByPreviousSideLength(-1) )
-  }
-
-  @Test
   def getDiagonalValuesForSidelength3(){
     assert ( List(3, 5, 7, 9) === euler58.getDiagonalValuesForSidelengthGivenStartValue( 3, 1) )
   }
