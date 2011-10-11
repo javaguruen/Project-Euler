@@ -2,12 +2,14 @@ package euler
 
 import java.lang.Long
 import collection.mutable.HashMap
+import org.slf4j.{Logger, LoggerFactory}
 
 class Euler95 {
 
   var kjeder = new HashMap[Int, List[Long]]
   val start = 1
   val slutt = 1000000
+  private val logger : Logger = LoggerFactory.getLogger( "Euler95" )
 
   def sumOfDivisors(number: Long): Long = {
     val factors: List[Long] = MathLib.properDivisors(number)
@@ -17,16 +19,18 @@ class Euler95 {
     sum
   }
 
+
+
   def findLongestChain(): List[Int] = {
-    println("Finner lengste kjeder...")
+    logger.info("Finner lengste kjeder...")
     var maxLength = -1
     var longestChain: List[Int] = Nil
     for (i <- start until slutt) {
       if (i % 100000 == 0) {
-        println("\t" + i)
+        logger.info("\t" + i)
       }
       if (!kjeder.contains(i)) {
-        println(" finner ikke kjede for " + i)
+        logger.info(" finner ikke kjede for " + i)
       }
       else {
         val chain = kjeder(i)
@@ -76,22 +80,24 @@ class Euler95 {
 
   def run(): Int = {
     //    for ( tall <- 220 until 221){
-    println("Finner kjeder...")
+    logger.info("Finner kjeder...")
+    logger.info("Finner kjeder")
     for (tall <- start until slutt) {
       if (tall % 100000 == 0) {
-        println("\t" + tall)
+        logger.info("\t" + tall)
       }
       var kjede: scala.List[Long] = finnKjedeForTall2(tall)
       kjeder(tall) = kjede
     }
 
     val longestChain = findLongestChain()
-    println("Lengste kjeder har lengde " + longestChain.size)
-    println("Lengste kjeder " + longestChain)
+    logger.info("Lengste kjeder har lengde " + longestChain.size)
+    logger.info("Lengste kjeder " + longestChain)
     longestChain.foreach( e => println( kjeder(e)))
     var chain = kjeder( longestChain(0) ).sortWith( (a,b) => a<b )
-    println("******************")
-    println (chain)
+    logger.info("******************")
+    logger.info("" + chain)
     -1
   }
+
 }

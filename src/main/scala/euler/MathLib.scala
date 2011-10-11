@@ -4,7 +4,7 @@ import scala.collection.mutable
 import scala.collection.JavaConversions._
 import scala.collection.mutable.ListBuffer
 import java.lang.Long
-import java.math.BigInteger
+import java.math.{BigDecimal, BigInteger}
 
 object MathLib {
 
@@ -254,5 +254,17 @@ object MathLib {
     val s = (a + b + c) / 2.0
 
     scala.math.sqrt( s * (s-a) * (s-b) * (s-c) )
+  }
+
+  def triangleAreaBySideLengthsBigDecimal(a: Int, b: Int, c: Int) : scala.math.BigDecimal = {
+    var s = scala.math.BigDecimal( (a+b+c)/2.0)
+//    scala.math.sqrt( s * (s-a) * (s-b) * (s-c) )
+    val sa : scala.math.BigDecimal = s-a
+    val sb : scala.math.BigDecimal = s-b
+    val sc : scala.math.BigDecimal = s-c
+
+    val tmp : scala.math.BigDecimal =  (s * (sa) * (sb) * (sc))
+    scala.math.sqrt(tmp.toDouble)
+
   }
 }
