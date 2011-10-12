@@ -87,4 +87,9 @@ class MathLibTest extends AssertionsForJUnit {
   def triangleAreaBySideLengthsTest(){
     assert( 12 === MathLib.triangleAreaBySideLengths (5, 5, 6))
   }
+
+  @Test
+  def resilience12(){
+    assert( (4.0/11.0 === MathLib.resilience (12)))
+  }
 }

@@ -267,4 +267,23 @@ object MathLib {
     scala.math.sqrt(tmp.toDouble)
 
   }
+
+  def resilience(denominator : Int) : Double = {
+    var factorsDenominator = properDivisors( denominator )
+    var nonCancellableNominators = 1
+    for( nominator <- 2 until denominator){
+      if( !factorsDenominator.contains( nominator )){
+        val factorsNominator = properDivisors( nominator )
+        val tempList = factorsDenominator ::: factorsNominator
+        val tempSet = tempList.toSet
+        if( tempSet.size == (factorsDenominator.size + factorsNominator.size -1 )){
+          nonCancellableNominators += 1
+          println("teller=" + nominator)
+          println("factorsNominator " + factorsNominator)
+          println("factorsDenominator " + factorsDenominator)
+        }
+      }
+    }
+    nonCancellableNominators.toDouble/(denominator-1)
+  }
 }
