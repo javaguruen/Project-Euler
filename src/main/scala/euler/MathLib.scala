@@ -97,7 +97,7 @@ object MathLib {
 
   def isPrime(tall: Long) = allFactors(tall).isEmpty
 
-  def isPrimeFast(tall: Long) = (tall == 2 || (!hasFactor(tall) && tall>1))
+  def isPrimeFast(tall: Long) = (tall == 1 || tall == 2 || (!hasFactor(tall) && tall>1))
 
   def allPrimesInRange(primeMax: Int) : List[Int] = {
     val result = List.range(2, primeMax)
@@ -174,7 +174,7 @@ object MathLib {
     asList(ListBuffer(factors: _*))
   }
 
-  def properDevisorsScala(n: Int): List[Int] = {
+  def properDivisorsScala(n: Int): List[Int] = {
     var factors: List[Int] = Nil
     val max = scala.math.ceil(n.doubleValue / 2)
     var i = 1
@@ -186,6 +186,10 @@ object MathLib {
       i += 1
     } while (i <= max)
     factors
+  }
+
+  def properDivisorsScalaIncludingN(n: Int): List[Int] = {
+    n :: properDivisorsScala ( n )
   }
 
 

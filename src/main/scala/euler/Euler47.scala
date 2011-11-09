@@ -8,7 +8,7 @@ class Euler47 {
     var consecutiveCount = 0;
     for (n <- 1 until 10000000 ){
 
-      val list = MathLib.properDevisorsScala(n)
+      val list = MathLib.properDivisorsScala(n)
       val filteredlist = list.filter(n => MathLib.isPrimeFast(n) || n==2)
       if (filteredlist.size == 4) {
         consecutiveCount +=1
