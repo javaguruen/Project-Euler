@@ -13,7 +13,9 @@ class Euler58Test extends AssertionsForJUnit {
   def antallPrimtallIListe(){
     assert( 5 === euler58.antallPrimtall ( List(1, 3, 5, 7, 9, 2, 0, 4)))
   }
-  
+
+
+
   @Test
   def incrementalFor4(){
     assert( 4 === euler58.getIncrementByPreviousSideLength(3) )
