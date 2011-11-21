@@ -25,24 +25,6 @@ class Euler357Test {
   }
 
   @Test
-  def kandidater(){
-    val start = System.currentTimeMillis()
-    var kandids :List[Int] = Nil
-    for(n <- 2 until 100000000 by 2){
-      val ivn =  2 + (n / 2)
-      if( MathLib.isPrimeFast( ivn )){
-        kandids = n :: kandids
-      }
-
-      if (n % 100000 == 0) {
-        val stopp = System.currentTimeMillis()
-        println("n=" + n + " tid(s)=" + (stopp - start) / 1000)
-      }
-    }
-  }
-
-
-  @Test
   def isAllDivisorsDivNPrimeTestNeg {
     val euler357 = new Euler357();
        val divisors = MathLib.properDivisorsScalaIncludingN(3)
