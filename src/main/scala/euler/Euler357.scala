@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory
 class Euler357 {
   val logger = LoggerFactory.getLogger( "Euler357" )
 
-  val maxCachedPrime = 1000000
+  val maxCachedPrime = 1
   var primtallUnderMill = getPrimtallUnder(maxCachedPrime)
 
 
@@ -16,15 +16,17 @@ class Euler357 {
     logger.info("Starter kjøring - divisors inline, cache=" + maxCachedPrime)
     var sum = 1L
     val start = System.currentTimeMillis()
-    for (n <- 2 until maksN by 2) {
+    for (n <- 2 until maksN by 4) {
 
-      val max = scala.math.ceil(n.doubleValue / 2)
+      val max = scala.math.sqrt(n.doubleValue)
       var i = 1
 
       var fortsatt = true
       do {
         if (n % i == 0) {
+          logger.debug(n + " funnet faktorene: " + i + " og " + (n/i) )
           if( ! isDivNprime(i, n)) fortsatt = false
+          if( ! isDivNprime((n/i), n)) fortsatt = false
         }
         i += 1
       }
@@ -33,21 +35,9 @@ class Euler357 {
         logger.debug("ok for " + n)
         sum += n
       }
-      if (n % 10000 == 0) {
+      if (n % 10002 == 0) {
         logger.info("n=" + n + " sum=" + sum + " tid(s)=" + (System.currentTimeMillis() - start) / 1000)
       }
-
-/*
-
-      val div2N = isDivNprime(2, n)
-      if( div2N){
-        logger.debug("Sjekker for n= " + n)
-        val divisors = MathLib.properDivisorsScalaIncludingN(n)
-        val allDivNPrimes: Boolean = isAllDivisorsDivNPrime(divisors.reverse, n)
-        if (allDivNPrimes) {
-          sum += n
-        }
-      }*/
     }
     sum
   }
@@ -81,25 +71,11 @@ class Euler357 {
       }
     }
     true
-    /*
-        val erPrimtall = list.filter( d => isDivNprime(d, n))
-        erPrimtall.size == list.size
-    */
   }
 
   def isDivNprime(d: Int, n: Int): Boolean = {
     val candidate: Long = d + (n / d)
-    //MathLib.isPrimeFast(d + (n / d))
-
-    //println("\t d+(n/d)=" + d + "+(" + n + "/" + d + ") =" + candidate)
-    //MathLib.isPrimeFast(candidate)
-    if (candidate < maxCachedPrime) {
-      primtallUnderMill.contains(candidate)
-    }
-    else {
-      println("sjekker kandidat over maxCached")
-      MathLib.isPrimeFast(candidate)
-    }
+    MathLib.isPrimeFast(candidate)
   }
 
 

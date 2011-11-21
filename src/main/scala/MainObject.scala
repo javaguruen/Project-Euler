@@ -6,8 +6,8 @@ object MainObject{
     val start = new Date()
     println( "Starter kjøring: " + start)
     val euler = new Euler357()
+    //val maksN: Int   = 40
     val maksN: Int = 100000000
-    //val maksN: Int = 100000000
     val resultat = euler.run(maksN)
     val ferdig = new Date()
     println( "Ferdig: " + ferdig)
