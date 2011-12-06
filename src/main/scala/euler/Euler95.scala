@@ -1,6 +1,5 @@
 package euler
 
-import java.lang.Long
 import collection.mutable.HashMap
 import org.slf4j.{Logger, LoggerFactory}
 

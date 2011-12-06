@@ -1,9 +1,8 @@
 package euler
 
-import org.scalatest.junit.AssertionsForJUnit
-import org.junit.{Before, Test}
+import org.junit.{Ignore, Before, Test}
 
-class Euler49Test extends AssertionsForJUnit {
+class Euler49Test  {
   var euler49 : Euler49 = null
 
 

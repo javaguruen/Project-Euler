@@ -1,12 +1,12 @@
 package euler
 
 import scala.collection.mutable
-import scala.collection.JavaConversions._
-import scala.collection.mutable.ListBuffer
-import java.lang.Long
 import java.math.{BigDecimal, BigInteger}
+import org.slf4j.{LoggerFactory, Logger}
 
 object MathLib {
+  private val logger: Logger = LoggerFactory.getLogger("MathLib")
+
 
   def summer(liste : List[Long] ) : Long = liste.foldLeft(0l) { (s, e) => s + e } 
 
@@ -29,26 +29,6 @@ object MathLib {
     retur
   }
 
-  /**
-   * Alle faktorene (inkludert 1) som tall er delelig på, men ikke tallet selv.
-   */
-  def properDivisors(tall: Long): List[Long] = {
-    var factors: List[Long] = 1 :: Nil
-    var max = scala.math.ceil(scala.math.sqrt(tall.doubleValue))
-    var i = 2
-
-    do {
-      val divisor: Long = tall % i
-      if (divisor == 0) {
-        factors = (tall/i) :: factors
-        factors = i :: factors
-      }
-      i += 1
-    } while (i <= max)
-    factors = factors.sortWith( (a,b) => a<b)
-    factors = factors.removeDuplicates
-    factors
-  }
 
 
   @Deprecated()
@@ -160,20 +140,28 @@ object MathLib {
     !manglerTegn
   }
 
-  def properDevisors(n: Int): java.util.List[Int] = {
-    var factors: List[Int] = Nil
-    val max = scala.math.ceil(n.doubleValue / 2)
-    var i = 1
+  /**
+   * Alle faktorene (inkludert 1) som tall er delelig på, men ikke tallet selv.
+   */
+  def properDivisors(tall: Long): List[Long] = {
+    var factors: List[Long] = 1 :: Nil
+    var max = scala.math.ceil(scala.math.sqrt(tall.doubleValue))
+    var i = 2
 
     do {
-      if (n % i == 0) {
+      val divisor: Long = tall % i
+      if (divisor == 0) {
+        factors = (tall/i) :: factors
         factors = i :: factors
       }
       i += 1
     } while (i <= max)
-    asList(ListBuffer(factors: _*))
+    factors = factors.sortWith( (a,b) => a<b)
+    factors = factors.removeDuplicates
+    factors
   }
-
+/*
+  @Deprecated("Bruk properDivisors(Long): List[Long]")
   def properDivisorsScala(n: Int): List[Int] = {
     var factors: List[Int] = Nil
     val max = scala.math.ceil(n.doubleValue / 2)
@@ -187,9 +175,10 @@ object MathLib {
     } while (i <= max)
     factors
   }
+*/
 
-  def properDivisorsScalaIncludingN(n: Int): List[Int] = {
-    n :: properDivisorsScala ( n )
+  def properDivisorsScalaIncludingN(n: Long): List[Long] = {
+    n :: properDivisors ( n )
   }
 
 
@@ -272,22 +261,4 @@ object MathLib {
 
   }
 
-  def resilience(denominator : Int) : Double = {
-    var factorsDenominator = properDivisors( denominator )
-    var nonCancellableNominators = 1
-    for( nominator <- 2 until denominator){
-      if( !factorsDenominator.contains( nominator )){
-        val factorsNominator = properDivisors( nominator )
-        val tempList = factorsDenominator ::: factorsNominator
-        val tempSet = tempList.toSet
-        if( tempSet.size == (factorsDenominator.size + factorsNominator.size -1 )){
-          nonCancellableNominators += 1
-          println("teller=" + nominator)
-          println("factorsNominator " + factorsNominator)
-          println("factorsDenominator " + factorsDenominator)
-        }
-      }
-    }
-    nonCancellableNominators.toDouble/(denominator-1)
-  }
 }

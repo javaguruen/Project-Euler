@@ -5,7 +5,7 @@ class Euler21 {
     var vennligsum = 0
     var sumD : Array[Int] = new Array[Int](10001);
     for( i <- 1 until 10000){
-      val devisors = MathLib.properDevisors( i )
+      val devisors = MathLib.properDivisors( i.longValue() )
       println ("devisors: " + devisors)
       val sum = summer(devisors)
       println ("sum[" + i + "] = " + sum)
@@ -23,12 +23,12 @@ class Euler21 {
     vennligsum
   }
 
-  def summer( tall : java.util.List[Int] ) : Int = {
-    var sum = 0;
-    for( i <- 0 until tall.size() ){
-      sum = sum + tall.get(i)
+  def summer( tall : List[Long] ) : Int = {
+    var sum = 0L;
+    for( i <- 0 until tall.size ){
+      sum = sum + tall(i)
     }
-    sum
+    sum.intValue()
   }
 
   def fakultet(n: Int): BigInt = {

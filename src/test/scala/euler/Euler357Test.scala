@@ -21,7 +21,7 @@ class Euler357Test {
   def brukerRiktigDivisorMetode(){
     val divisors = MathLib.properDivisorsScalaIncludingN(30).reverse
     println("Divisors: " + divisors)
-    assert( List(1, 2, 3, 5, 6, 10, 15, 30) == divisors)
+    assert( List(1, 2, 3, 5, 6, 10, 15, 30) == divisors.sortWith{ (a,b) => a<b})
   }
 
   @Test
@@ -29,22 +29,14 @@ class Euler357Test {
     val euler357 = new Euler357();
        val divisors = MathLib.properDivisorsScalaIncludingN(3)
        print(divisors)
-       assert(false == euler357.isAllDivisorsDivNPrime(divisors, 3))
+       assert(false == euler357.isAllDivisorsDivNPrimeLong(divisors, 3))
   }
 
   @Test
   def isAllDivisorsDivNPrimeTest() {
     val euler357 = new Euler357();
     val divisors = MathLib.properDivisorsScalaIncludingN(30)
-    assert(true == euler357.isAllDivisorsDivNPrime(divisors, 30))
+    assert(true == euler357.isAllDivisorsDivNPrimeLong(divisors, 30))
   }
 
-  @Test
-  @Ignore("Gir outofmemory")
-  def isPermutasjonTest() {
-    val euler357 = new Euler357()
-    val allPrimesInRange: List[Int] = MathLib.allPrimesInRange(100000000)
-    println("Antall primtall under 100.000.000 " + allPrimesInRange.size)
-    assert(false == MathLib.isPrimeFast(1))
-  }
 }

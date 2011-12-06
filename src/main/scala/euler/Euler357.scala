@@ -1,6 +1,5 @@
 package euler
 
-import java.lang.Long
 import org.slf4j.LoggerFactory
 
 
@@ -67,6 +66,15 @@ class Euler357 {
   def isAllDivisorsDivNPrime(divisors: List[Int], n: Int): Boolean = {
     for (i <- 0 until divisors.size) {
       if (!isDivNprime(divisors(i), n)) {
+        return false
+      }
+    }
+    true
+  }
+
+  def isAllDivisorsDivNPrimeLong(divisors: List[Long], n: Int): Boolean = {
+    for (i <- 0 until divisors.size) {
+      if (!isDivNprime(divisors(i).intValue(), n)) {
         return false
       }
     }

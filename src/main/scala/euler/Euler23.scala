@@ -8,7 +8,7 @@ class Euler23 {
     var sumD: Array[Int] = new Array[Int](maks+1);
     var abundantList: List[Int] = Nil
     for (i <- 1 until maks) {
-      val devisors = MathLib.properDevisors(i)
+      val devisors = MathLib.properDivisors(i)
       val sum = summer(devisors)
       //      println("sum[" + i + "] = " + sum)
       if (sum > i) {
@@ -43,12 +43,12 @@ class Euler23 {
     myMap
   }
 
-  def summer(tall: java.util.List[Int]): Int = {
-    var sum = 0;
-    for (i <- 0 until tall.size()) {
-      sum = sum + tall.get(i)
+  def summer(tall: List[Long]): Int = {
+    var sum = 0L;
+    for (i <- 0 until tall.size) {
+      sum = sum + tall(i)
     }
-    sum
+    sum.intValue()
   }
 
 }
