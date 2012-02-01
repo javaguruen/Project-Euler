@@ -7,11 +7,7 @@ class Euler15 {
   val size=2
   val logger = LoggerFactory.getLogger( "Euler15")
   //var kart = Array.range(0,2).map(i => Array.range(0,2).map(j => (i,j)))
-  var kart = new Array[ Array[Int]](3)
-
-
-
-
+  var kart = new Array[ Array[Long]](21)
 
   def run(): Long = {
     var x = 0
@@ -20,15 +16,27 @@ class Euler15 {
 
     logger.info("Starter kjøring")
     println( kart )
-    kart(0) = Array(-1, -1, -1)
-    kart(1) = Array(-1, -1, -1)
-    kart(2) = Array(-1, -1, -1)
+    val dim: Int = 21
+    for( i <-0 until dim){
+      kart(i) = new Array[Long](dim)
+    }
 
-    println( kart )
+    for( i <- 0 until dim){
+      kart(0)(i) = 1
+    }
+    for( i <- 0 until dim){
+      kart(i)(0) = 1
+    }
 
+    for( row <- 1 until dim){
+      for( col <- 1 until dim){
+        kart(row)(col) = kart(row-1)(col) + kart(row)(col-1)
+      }
+    }
 
-
-    findEdges(x, y)
+    val antallStier = kart(dim - 1)(dim - 1)
+    println( antallStier)
+    antallStier
   }
 
   def findEdges(x: Int, y: Int) : Int = {
