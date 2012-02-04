@@ -1,4 +1,4 @@
-tverrmain = let a = factorial 100
+tverrmain = let a = 2 ^ 1000
                 astr = show a
                 in tverrsum astr
 
