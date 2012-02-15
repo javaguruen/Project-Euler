@@ -3,6 +3,10 @@ package euler
 import org.slf4j.LoggerFactory
 import scala.math._
 
+//796340
+//796693
+
+//==> 861805
 class Euler370 {
 
   val logger = LoggerFactory.getLogger("Euler370")
@@ -11,36 +15,50 @@ class Euler370 {
 
   val maksOmkrets = (scala.math.pow(10, 6)).toLong
 
-
-  def isHeltall(tall: Double): Boolean = {
-    abs(tall - floor(tall + 0.5)) < 0.00001
+  def litenNokOmkrets(a: Long, b: Long, c: Long): Boolean = {
+    if (a <= 0 || b <= 0 || c <= 0) {
+      throw new Exception("litenNokOmkrets overflow")
+    }
+    (a + b + c) <= maksOmkrets
   }
 
-  def litenNokOmkrets(a: Long, b: Long, c: Long): Boolean = (a + b + c) <= maksOmkrets
-
   def run(): Long = {
-    val rangeEnkel = List.range(1, sqrt(maksOmkrets).toInt + 10)
-    val rangeSqr = rangeEnkel.map(a => a * a)
-    println(rangeSqr)
+    println("Doing the rangemaking")
+    val rangeEnkel = List.range(1, sqrt(maksOmkrets).toInt + 100)
+    val rangeSqr = rangeEnkel.map(a => BigInt(a) * BigInt(a))
+    println("...done")
+    println("Maks in range=" + rangeSqr(rangeSqr.size - 1))
 
     //val maksOmkrets = (2.5 * scala.math.pow(10, 13)).toLong
     var a = 1
     var geometricTriangles = 0
-    println("maksOmkrets/3=" + maksOmkrets/3)
-
-    for (a <- 1 to (maksOmkrets / 3).toInt + 1) {
-      //logger.info("*** A=" + a)
+    for (a <- 1 to (maksOmkrets / 3).toInt + 100) {
+      logger.debug("*** A=" + a)
       rangeSqr.foreach(rangeElem => {
-        val c: Long = rangeElem * a
+        if (rangeElem <= 0) {
+          throw new Exception("rangeElem overflow")
+        }
+        val c = rangeElem * a
+        if (c <= 0) {
+          throw new Exception("C overflow: a=" + a + ", rangeElem=" + rangeElem)
+        }
         if (c > 0) {
-          val b = scala.math.sqrt(a * c).toInt
-          if (litenNokOmkrets(a, b, c)) {
+          val cTimesA: BigInt = c * a
+          if (cTimesA <= 0) {
+            throw new Exception("C*a overflow: a=" + a + ", c=" + c)
+          }
+          val b = scala.math.sqrt(cTimesA.toLong).toLong
+          if (litenNokOmkrets(a, b, c.longValue())) {
             geometricTriangles += 1
-            logger.info("Fant geometrisk triangel nr " + geometricTriangles + " for a=" + a + ", b=" + b + ", c=" + c)
+            logger.debug("Fant geometrisk triangel nr " + geometricTriangles + " for a=" + a + ", b=" + b + ", c=" + c)
           }
         }
       }
       )
+      if (!rangeSqr.contains(a) && litenNokOmkrets(a, a, a)) {
+        geometricTriangles += 1
+        logger.debug("Fant geometrisk triangel nr " + geometricTriangles + " for a=b=c=" + a )
+      }
     }
     geometricTriangles
   }
