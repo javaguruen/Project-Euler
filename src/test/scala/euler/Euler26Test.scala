@@ -27,17 +27,4 @@ class Euler26Test {
     assert(6 == euler26.detectCycle(tall))
   }
 
-  @Test
-  def test1div4IngenCycle() {
-    val tall = "0.25"
-    assert(0 == euler26.detectCycle(tall))
-  }
-
-  @Test
-  def test1ToLikeIngenCycle() {
-    val tall = "0.001052"
-    assert(0 == euler26.detectCycle(tall))
-  }
-
-
 }
