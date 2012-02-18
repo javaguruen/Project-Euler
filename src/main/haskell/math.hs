@@ -1,5 +1,9 @@
 module Math where
 
+
+isDividableBy :: Int -> Int -> Bool
+isDividableBy divisor n = n `mod` divisor == 0
+
 isAmicable :: Int -> Bool
 isAmicable n = let sumproper = tverrsum (properfactors n)
                    possiblepair = tverrsum ( properfactors sumproper)
@@ -40,12 +44,16 @@ properfactors n = let maxCand = preparefactors n
             in factorsLoop n maxCand 2 [1]
 
 factorsLoop :: Int ->Int ->Int -> [Int] -> [Int]
-factorsLoop n maxCandidate iter acc = if iter < maxCandidate
+factorsLoop n maxCandidate iter acc = if iter <= maxCandidate
     then
         if n `mod` (fromIntegral) iter < 1
             then --factor found
             let tmp = iter + 1
-                accC = [iter] ++ [ n `div` iter] ++ acc 
+                accC = if iter /= n `div` iter
+                    then
+                        [iter] ++ [ n `div` iter] ++ acc 
+                    else
+                        [iter] ++ acc    
                 in factorsLoop n maxCandidate tmp accC
             else
             let tmp = iter + 1
