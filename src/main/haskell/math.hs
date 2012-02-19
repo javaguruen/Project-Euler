@@ -1,5 +1,15 @@
 module Math where
 
+fibonacciList :: Int -> [Int]
+fibonacciList 1  = [1]
+fibonacciList n = [1,1] ++ innerfibonacciList n 1 1 3
+
+innerfibonacciList :: Int -> Int -> Int -> Int -> [Int]
+innerfibonacciList n beforeLastElem lastElem  iter = if (iter <= n)
+    then
+        [(lastElem + beforeLastElem)] ++ (innerfibonacciList n lastElem (beforeLastElem + lastElem) (iter+1))
+    else
+        []
 
 isDividableBy :: Int -> Int -> Bool
 isDividableBy divisor n = n `mod` divisor == 0
