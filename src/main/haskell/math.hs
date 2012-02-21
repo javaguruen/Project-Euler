@@ -1,5 +1,24 @@
 module Math where
 
+
+crossedMulti :: [Int] -> [Int] -> [Int]
+crossedMulti (x:xs) (ys) = crossed x ys ++ crossedMulti xs ys
+crossedMulti [] (ys) = []
+
+crossed :: Int -> [Int] -> [Int]
+crossed n (xs) = map (n *) xs
+
+isPalindrome :: Eq a => [a] -> Bool
+isPalindrome str = let rev = reverse str
+                   in listsEqual str rev
+
+
+listsEqual :: Eq a => [a] -> [a] -> Bool
+listsEqual (x:xs) (y:ys) = if not (x==y) then False else listsEqual xs ys
+listsEqual [] [] = True
+listsEqual (x:xs) [] = False
+listsEqual [] (y:ys) = False
+
 fibonacciList :: Int -> [Int]
 fibonacciList 1  = [1]
 fibonacciList n = [1,1] ++ innerfibonacciList n 1 1 3
