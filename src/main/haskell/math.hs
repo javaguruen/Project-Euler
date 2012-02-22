@@ -1,5 +1,20 @@
 module Math where
 
+nthPrime :: Int -> Int
+nthPrime n = innerloopNthPrime n 2 3
+
+
+innerloopNthPrime n acc iter = if isprime iter
+              then
+                let iter2 = iter +1
+                    acc2 = acc +1
+                in if acc2 > n then
+                    iter
+                    else
+                    innerloopNthPrime n acc2 iter2
+              else
+                let iter2 = iter +1
+                in innerloopNthPrime n acc iter2
 
 crossedMulti :: [Int] -> [Int] -> [Int]
 crossedMulti (x:xs) (ys) = crossed x ys ++ crossedMulti xs ys
