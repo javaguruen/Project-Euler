@@ -57,6 +57,10 @@ tverrsum :: [Int] -> Int
 tverrsum (x:xs) = tverrsum xs + x
 tverrsum [] = 0
 
+tverrprodukt :: String -> Int
+tverrprodukt (x:xs) = (read [x]) * tverrprodukt xs
+tverrprodukt [] = 1
+
 isprime :: Int -> Bool 
 isprime n = let maxCand = prepare n
                 in isprimeloop n maxCand 2
