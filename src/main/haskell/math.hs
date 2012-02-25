@@ -1,5 +1,20 @@
 module Math where
 
+isPytagoreanTriplet :: Int -> Int -> Int -> Bool
+isPytagoreanTriplet a b c = let firstCondition = (a < b) && (b < c)
+                                secoundCondition = a^2 + b^2 == c^2
+                                in firstCondition && secoundCondition
+
+
+allPermutations :: Int -> [Int] -> [Int] -> [(Int , Int, Int)]
+allPermutations c (x:xs) (ys) = (tuplify c x ys) ++ allPermutations c xs ys
+allPermutations c [] (ys) = []
+
+
+tuplify :: Int -> Int -> [Int] -> [(Int,Int,Int)]
+tuplify c n (x:xs) = [(c,n,x)] ++ tuplify c n xs
+tuplify c n [] = [] 
+
 nthPrime :: Int -> Int
 nthPrime n = innerloopNthPrime n 2 3
 
@@ -14,7 +29,8 @@ innerloopNthPrime n acc iter = if isprime iter
                     innerloopNthPrime n acc2 iter2
               else
                 let iter2 = iter +1
-                in innerloopNthPrime n acc iter2
+                in innerloopNthPrime n acc iter2                
+
 
 crossedMulti :: [Int] -> [Int] -> [Int]
 crossedMulti (x:xs) (ys) = crossed x ys ++ crossedMulti xs ys
