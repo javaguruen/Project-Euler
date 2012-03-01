@@ -1,5 +1,9 @@
 module Math where
 
+toTriangleNumber :: Int -> Int
+toTriangleNumber 1 = 1 
+toTriangleNumber n = n + toTriangleNumber (n-1)
+
 isPytagoreanTriplet :: Int -> Int -> Int -> Bool
 isPytagoreanTriplet a b c = let firstCondition = (a < b) && (b < c)
                                 secoundCondition = a^2 + b^2 == c^2

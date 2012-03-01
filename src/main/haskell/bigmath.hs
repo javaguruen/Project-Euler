@@ -1,5 +1,9 @@
 module BigMath where
     
+toTriangleNumberBig :: Integer -> Integer
+toTriangleNumberBig 1 = 1
+toTriangleNumberBig n = n + toTriangleNumberBig (n-1)
+
 isprimeBig :: Integer -> Bool 
 isprimeBig n = let maxCand = preparefactorsBig n
                 in isprimeloopBig n maxCand 2
