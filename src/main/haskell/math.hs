@@ -1,5 +1,24 @@
 module Math where
 
+
+collatzChainLength :: Int -> Int 
+collatzChainLength n = collatzChainLengthInner 0 n
+
+collatzChainLengthInner :: Int -> Int  -> Int
+collatzChainLengthInner acc 1 = acc
+collatzChainLengthInner acc n = if even n then
+                              collatzChainLengthInner (acc+1) (n `div` 2)
+                           else
+                              collatzChainLengthInner (acc+1) (3 * n +1 )
+
+collatzChain :: Int -> [Int]
+collatzChain 1 = []
+collatzChain n = if even n  then
+          [n `div` 2] ++ collatzChain  (n `div` 2)
+        else
+          [3 * n + 1] ++ collatzChain (3 * n +1) 
+
+
 strToIntList :: [String] -> [Integer]
 strToIntList (x:xs) = [read x] ++ strToIntList xs
 strToIntList [] = [] 
