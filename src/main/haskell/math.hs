@@ -1,5 +1,9 @@
 module Math where
 
+strToIntList :: [String] -> [Integer]
+strToIntList (x:xs) = [read x] ++ strToIntList xs
+strToIntList [] = [] 
+
 toTriangleNumber :: Int -> Int
 toTriangleNumber 1 = 1 
 toTriangleNumber n = n + toTriangleNumber (n-1)
