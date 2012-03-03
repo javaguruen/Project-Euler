@@ -1,5 +1,9 @@
 module BigMath where
     
+tverrsumBig :: String -> Integer
+tverrsumBig (x:xs) = read [x] + tverrsumBig xs
+tverrsumBig [] = 0
+
 toTriangleNumberBig :: Integer -> Integer
 toTriangleNumberBig 1 = 1
 toTriangleNumberBig n = n + toTriangleNumberBig (n-1)
