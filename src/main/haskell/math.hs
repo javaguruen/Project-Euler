@@ -1,5 +1,26 @@
 module Math where
 
+--getOnes : Untested!
+getOnes :: Int -> Int
+getOnes n = let onepart = n `div` 10
+                upfilter = onepart * 10
+            in n - upfilter 
+
+
+getTens :: Int -> Int
+getTens n =  let tenpart = n `div` 100
+                 upfilter = tenpart * 100
+            in ((n - upfilter) `div` 10)
+
+getHundreds :: Int -> Int
+getHundreds n = let hundredpart = n `div` 1000
+                    upfilter = hundredpart * 1000
+            in ((n - upfilter) `div` 100)
+
+getThousands :: Int -> Int
+getThousands n  = let thousandpart = n `div` 10000
+                      upfilter = thousandpart * 10000
+                in ((n - upfilter) `div` 1000)
 
 collatzChainLength :: Int -> Int 
 collatzChainLength n = collatzChainLengthInner 0 n
