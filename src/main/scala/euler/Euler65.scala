@@ -3,7 +3,7 @@ package euler
 class Euler65 {
 
   val pattern = makePattern(33)
-  val maksantall = 5
+  val maksantall = 100
 
   def makePattern(antallMoenster: Int): Array[Long] = {
     val p = new Array[Long](1 + 3 * antallMoenster + 1)
@@ -27,79 +27,40 @@ class Euler65 {
 
   def run(): Long = {
     printPattern
+    var (t, n) = ( BigInt(0), BigInt(0) )
     for (i <- 1 to maksantall) {
       val (eTeller, eNevner) = conv(i);
       println("c(" + i + "): e = " + eTeller + " / " + eNevner)
+      if( i==maksantall){
+        t = eTeller
+        n = eNevner
+      }
     }
-    1
+    val tverrsum = t.toString().foldLeft(0){ (sum, e) => sum +  e.toInt - '0'.toInt}
+    println("Tverrsum = " + tverrsum)
+    tverrsum
   }
 
-  def conv(maksantall: Int): (Long, Long) = {
-    if (maksantall == 1) {
-      return (pattern(1), 1)
+  def conv(m: Int): (BigInt, BigInt) = {
+    if (m == 1) {
+      return ( BigInt(pattern(1)), BigInt(1) )
     }
-    val (teller, nevner) = (1, pattern(maksantall))
-    return convRek(maksantall - 1, teller, nevner);
+    var (teller , nevner) = convRek(2, m)
+    return (nevner * BigInt(2) + teller, nevner)
   }
 
-  def convRek(i: Int, teller: Long, nevner: Long): (Long, Long) = {
+  def convRek(i: Int, m : Int): (BigInt, BigInt) = {
     val pattern_i: Long = pattern(i)
-    if (i == 1) {
-      return (pattern_i * nevner + teller, nevner)
-    }
-    if (i == maksantall - 1) {
-      val t = pattern_i * nevner + teller
-      val n = nevner
-      return convRek(i - 1, n, t)
+    if (i == m ) {
+      val t = 1
+      val n = pattern_i
+      return (BigInt(t), BigInt(n) )
     }
     else {
-      val t = pattern_i * nevner + 1
-      val n = nevner
-      return convRek(i - 1, n, t)
+      val (teller, nevner) = convRek(i+1, m)
+      val t = nevner
+      val n = nevner*pattern_i + teller
+      return (t,n)
     }
   }
-
-
-  def convBroek(cnr: Int, maksantall: Int): (Long, Long) = {
-    if (1 == maksantall) {
-      return (pattern(maksantall), 1)
-    }
-    if (cnr == maksantall) {
-      var teller = pattern(cnr - 1) * pattern(cnr) + 1
-      var nevner = pattern(cnr)
-      //prLongln("maks-> 1 / " + nevner)
-      return (1, nevner)
-      //return ( pattern(maksantall-1) + 1, pattern(maksantall))
-    }
-    /*
-        if (cnr == 1) {
-          val (tt, nn) = convBroek(cnr + 1, maksantall)
-          return (2*nn+tt, nn)
-        }
-    */
-    if (cnr < maksantall) {
-      val (tt, nn) = convBroek(cnr + 1, maksantall)
-      //      var teller =
-      return (nn, pattern(cnr) * nn + 1)
-    }
-    /*
-        if( cnr == maksantall) {
-          return 1.0 / pattern(cnr)
-        }
-        else{
-          return 1.0 / ( pattern(cnr) + conv( cnr+1, maksantall ) )
-        }
-    */ (-1, -1)
-  }
-
-  /*
-    def conv(cnr: Int, maksantall: Int): Double = {
-      if (cnr == maksantall) {
-        return 1.0 / pattern(cnr)
-      }
-      else {
-        return 1.0 / (pattern(cnr) + conv(cnr + 1, maksantall))
-      }
-    }
-  */
 }
