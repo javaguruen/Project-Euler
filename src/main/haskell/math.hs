@@ -1,5 +1,11 @@
 module Math where
 
+import Data.List.Split
+
+
+zip3CombineMax :: Integer -> Integer -> Integer ->Integer
+zip3CombineMax a b n = (max a b) + n
+
 --getOnes : Untested!
 getOnes :: Int -> Int
 getOnes n = let onepart = n `div` 10
@@ -39,10 +45,16 @@ collatzChain n = if even n  then
         else
           [3 * n + 1] ++ collatzChain (3 * n +1) 
 
+strToIntListWithSpaces :: [String] -> [[Integer]]
+strToIntListWithSpaces (x:xs) = [(parseNumberlistWithSeparator x " ")] ++ strToIntListWithSpaces xs
+strToIntListWithSpaces [] = [] 
 
 strToIntList :: [String] -> [Integer]
 strToIntList (x:xs) = [read x] ++ strToIntList xs
 strToIntList [] = [] 
+
+parseNumberlistWithSeparator :: String -> String -> [Integer]
+parseNumberlistWithSeparator strToParse separator = strToIntList (splitOn separator strToParse)
 
 toTriangleNumber :: Int -> Int
 toTriangleNumber 1 = 1 
