@@ -2,6 +2,14 @@ module Math where
 
 import Data.List.Split
 
+thr3 :: (a,b,c) -> c
+thr3 (a,b,c) = c
+
+fst3 :: (a,b,c) -> a
+fst3 (a,b,c) =  a
+
+snd3 :: (a,b,c) -> b
+snd3 (a,b,c) = b
 
 zip3CombineMax :: Integer -> Integer -> Integer ->Integer
 zip3CombineMax a b n = (max a b) + n
