@@ -1,4 +1,11 @@
 module BigMath where
+
+fibonacciBig :: Integer -> Integer
+fibonacciBig n = fibonacciBigInner 1 1 3 n
+
+fibonacciBigInner nmin2 nmin1 iter max = if iter < max 
+            then fibonacciBigInner nmin1 (nmin1 + nmin2) (iter+1) max
+            else (nmin1 + nmin2)
     
 tverrsumBig :: String -> Integer
 tverrsumBig (x:xs) = read [x] + tverrsumBig xs

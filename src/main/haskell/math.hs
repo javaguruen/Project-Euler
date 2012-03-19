@@ -2,6 +2,10 @@ module Math where
 
 import Data.List.Split
 
+
+digits :: Integer -> Int
+digits n = length (show n) 
+
 thr3 :: (a,b,c) -> c
 thr3 (a,b,c) = c
 
@@ -117,6 +121,11 @@ listsEqual (x:xs) (y:ys) = if not (x==y) then False else listsEqual xs ys
 listsEqual [] [] = True
 listsEqual (x:xs) [] = False
 listsEqual [] (y:ys) = False
+
+fibonacci :: Int -> Int
+fibonacci 1 = 1
+fibonacci 2 = 1
+fibonacci n = fibonacci (n-1) + fibonacci (n-2)
 
 fibonacciList :: Int -> [Int]
 fibonacciList 1  = [1]
