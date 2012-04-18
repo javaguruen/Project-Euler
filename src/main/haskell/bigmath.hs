@@ -1,5 +1,10 @@
 module BigMath where
 
+import CReal
+
+bigDivide :: CReal -> CReal
+bigDivide n = 1 / n
+
 fibonacciBig :: Integer -> Integer
 fibonacciBig n = fibonacciBigInner 1 1 3 n
 

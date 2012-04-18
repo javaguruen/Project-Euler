@@ -2,6 +2,8 @@ module Math where
 
 import Data.List.Split
 
+--maxWithIndex :: (Int, Int) -> (Int, Int) -> (Int, Int)
+maxWithIndex (indexOfLargest, largest) (candidateIndex, candidate) = if candidate > largest then (candidateIndex, candidate) else (indexOfLargest, largest)
 
 digits :: Integer -> Int
 digits n = length (show n) 
