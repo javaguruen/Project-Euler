@@ -1,1 +1,1 @@
-(println "svaret: " (reduce + ( concat (filter #(= (mod % 5) 0) [1 2 3 4 5 6 7 8 9] ) (filter #(= (mod % 3) 0) [1 2 3 4 5 6 7 8 9] ))))
+(println "svaret: " (reduce + (distinct ( concat (filter #(= (mod % 5) 0) (range 1 1000) ) (filter #(= (mod % 3) 0) (range 1 1000) )))))
