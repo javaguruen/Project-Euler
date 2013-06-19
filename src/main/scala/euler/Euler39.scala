@@ -24,7 +24,7 @@ class Euler39 {
   def findNumberSolutions(p : Int) : Int =  {
     val max = (p / 2).toInt
     var numberOfSolutions = 0
-
+/*
     for (val a:Int <- 1 to max ) {
       for (val b:Int <- a to max) {
         val leftside = a*a +b*b
@@ -34,6 +34,7 @@ class Euler39 {
         }
       }
     }
+    */
     numberOfSolutions
   }
 }
