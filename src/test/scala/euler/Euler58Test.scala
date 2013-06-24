@@ -6,13 +6,13 @@ import org.junit.Test
 import java.math.BigInteger
 
 class Euler58Test extends AssertionsForJUnit {
-  val euler58 = new Euler58()
+    val euler58 = new Euler58()
 
 
-  @Test
-  def antallPrimtallIListe(){
-    assert( 5 === euler58.antallPrimtall ( List(1, 3, 5, 7, 9, 2, 0, 4)))
-  }
+    @Test
+    def antallPrimtallIListe(){
+      assert( 5 === euler58.antallPrimtall ( List(1, 3, 5, 7, 9, 2, 0, 4)))
+    }
 
 
 
