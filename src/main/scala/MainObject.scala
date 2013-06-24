@@ -1,5 +1,5 @@
+import _root_.java.util.Date
 import euler._
-import java.util.Date
 
 object MainObject{
   def main(args : Array[String])  {

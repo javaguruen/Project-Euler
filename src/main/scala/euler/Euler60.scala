@@ -1,50 +1,120 @@
 package euler
 
+import scala.collection.mutable
+
+
 class Euler60 {
+  def from(i: Int): Stream[Int] = Stream.cons(i, from(i + 1))
+  case class TuplePair(val n1: Long, val n2: Long) {
 
+  }
 
-  def run() : Int = {
-    val tall = ( 3 to 10000000)
-    val primtall = tall.filter( t => MathLib.isPrimeFast(t)).take(100000)
-    val primtallArray = primtall.toArray
-    println( "Primtall: " + primtall.size)
+  val pairCache = new mutable.HashMap[TuplePair, Boolean]
 
-    for ( first <- 1 to 10) {
-      for (secnd <- first to 10) {
-        for (third <- secnd to 10) {
-          for (fourth <- third to 10 ) {
-            for (fifth <-fourth to 10) {
-              val en = primtallArray(first)
-              if (isAllFivePrimeConcatinatedFastAllParam(primtallArray(first), primtallArray(secnd), primtallArray(third), primtallArray(fourth), primtallArray(fifth) )) {
-                val sum = primtallArray(first) + primtallArray(secnd) +  primtallArray(third) + primtallArray(fourth) + primtallArray(fifth)
-
-                println(primtallArray)
-                return sum
-              }
-            }
+  def isAllPairsOk(pairs: List[(Int, Int)]) : Boolean = {
+    for (p <- pairs) {
+      val res = pairCache.get(TuplePair(p._1, p._2))
+      res match {
+        case Some(b : Boolean) => if( !b ) return false
+        case None => {
+          val ok = pairConcatenatedIsPrime(p._1, p._2)
+          pairCache.put(TuplePair(p._1, p._2), ok)
+          if (!ok) {
+            return false
           }
         }
       }
-
     }
+    println("Omg: 5tuple er kjempeprime! " + pairs)
+    true
+  }
+
+  def run(): Int = {
+    //val tall = ( 3 to 10000000)
+    lazy val tall = from(3)
+    val primtall = tall.filter(t => MathLib.isPrimeFast(t)).take(1000)
+    var smallestSum = Long.MaxValue
+
+    //val primtall = Numbers.filter( t => MathLib.isPrimeFast(t)).take(10000)
+
+    val primtallArray = primtall.toArray
+    println("Primtall: " + primtall.size)
+
+    val femtuppel = for {
+      first <- primtall
+      second <- primtall if second > first
+      third <- primtall if third > second
+      fourth <- primtall if fourth > third
+      fifth <- primtall if fifth > fourth
+    } yield (first, second, third, fourth, fifth)
+
+    for (femt <- femtuppel) {
+
+      val femtList = List(femt._1, femt._2, femt._3, femt._4, femt._5)
+      val pairs = for {
+        i <- femtList
+        j <- femtList
+        if j > i} yield (i, j)
+
+      var allPairsOk = isAllPairsOk( pairs )
+      if( allPairsOk) {
+        if (sumList(femtList) < smallestSum) {
+          smallestSum = sumList(femtList)
+        }
+      }
+    }
+
+    def sumList( tall : List[Int]) : Int = {
+      var sum : Int = 0
+      tall.foreach( n => sum = sum + n)
+      sum
+    }
+
+
+    /*
+        val en = primtallArray(first)
+        if (isAllFivePrimeConcatinatedFastAllParam(primtallArray(first), primtallArray(secnd), primtallArray(third), primtallArray(fourth), primtallArray(fifth) )) {
+          val sum = primtallArray(first) + primtallArray(secnd) +  primtallArray(third) + primtallArray(fourth) + primtallArray(fifth)
+
+          println(primtallArray)
+          return sum
+        }
+
+    */
+
+    /*
+        for ( first <- 1 until primtall.size) {
+          for (secnd <- first until primtall.size) {
+            for (third <- secnd until primtall.size) {
+              for (fourth <- third until primtall.size ) {
+                for (fifth <-fourth until primtall.size) {
+                }
+              }
+            }
+          }
+
+        }
+
+    */
     //val riktige = primtall.filter( n=> isAllFivePrimeConcatenated(n))
     //println("riktige: " + riktige)
 
-  //  val summer =
+    //  val summer =
     //riktige.size
     -1
   }
 
-  def isAllFivePrimeConcatenated( candidate : Long ) = {
-    val knowns = List (3, 7, 109, 673)
+  def isAllFivePrimeConcatenated(candidate: Long) = {
+    val knowns = List(3, 7, 109, 673)
     val res = knowns.filter(n => isAllFivePrimeConcatenatedFast(n))
     res.size == 4
   }
-  def isAllFivePrimeConcatinatedFastAllParam( n1 : Long, n2 : Long, n3:Long, n4:Long, n5:Long) : Boolean = {
-    if (!pairConcatenatedIsPrime(n1, n2 )) {
+
+  def isAllFivePrimeConcatinatedFastAllParam(n1: Long, n2: Long, n3: Long, n4: Long, n5: Long): Boolean = {
+    if (!pairConcatenatedIsPrime(n1, n2)) {
       return false;
     }
-    if (!pairConcatenatedIsPrime(n1, n3 )) {
+    if (!pairConcatenatedIsPrime(n1, n3)) {
       return false;
     }
     if (!pairConcatenatedIsPrime(n1, n4)) {
@@ -55,10 +125,10 @@ class Euler60 {
     }
 
 
-    if (!pairConcatenatedIsPrime(n2, n3 )) {
+    if (!pairConcatenatedIsPrime(n2, n3)) {
       return false;
     }
-    if (!pairConcatenatedIsPrime(n2, n4 )) {
+    if (!pairConcatenatedIsPrime(n2, n4)) {
       return false;
     }
     if (!pairConcatenatedIsPrime(n2, n5)) {
@@ -75,28 +145,30 @@ class Euler60 {
     }
     true
   }
-  def isAllFivePrimeConcatenatedFast( candidate : Long ) : Boolean = {
-    if (!pairConcatenatedIsPrime(candidate, 3 )) {
+
+  def isAllFivePrimeConcatenatedFast(candidate: Long): Boolean = {
+    if (!pairConcatenatedIsPrime(candidate, 3)) {
       return false;
     }
-    if (!pairConcatenatedIsPrime(candidate, 7 )) {
+    if (!pairConcatenatedIsPrime(candidate, 7)) {
       return false;
     }
-    if (!pairConcatenatedIsPrime(candidate, 109 )) {
+    if (!pairConcatenatedIsPrime(candidate, 109)) {
       return false;
     }
-    if (!pairConcatenatedIsPrime(candidate, 673 )) {
+    if (!pairConcatenatedIsPrime(candidate, 673)) {
       return false;
     }
-   true
-  }
-  def isPrime(number : Long) : Boolean = {
-    MathLib.isPrimeFast( number )
+    true
   }
 
-  def pairConcatenatedIsPrime(n1 : Long, n2 : Long) : Boolean ={
-    val comb1 : String = n1.toString + n2.toString
-    val comb2 : String = n2.toString + n1.toString
-    MathLib.isPrimeFast( comb1.toLong ) && MathLib.isPrimeFast( comb2.toLong)
+  def isPrime(number: Long): Boolean = {
+    MathLib.isPrimeFast(number)
+  }
+
+  def pairConcatenatedIsPrime(n1: Long, n2: Long): Boolean = {
+    val comb1: String = n1.toString + n2.toString
+    val comb2: String = n2.toString + n1.toString
+    MathLib.isPrimeFast(comb1.toLong) && MathLib.isPrimeFast(comb2.toLong)
   }
 }

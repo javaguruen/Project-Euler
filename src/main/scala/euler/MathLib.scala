@@ -1,7 +1,7 @@
 package euler
 
+import _root_.java.math.BigInteger
 import scala.collection.mutable
-import java.math.{BigDecimal, BigInteger}
 import org.slf4j.{LoggerFactory, Logger}
 
 object MathLib {
