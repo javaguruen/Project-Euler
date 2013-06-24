@@ -1,38 +1,29 @@
 package euler
 
 import scala.collection.mutable
+import scala.annotation.tailrec
 
 
 class Euler60 {
-  def from(i: Int): Stream[Int] = Stream.cons(i, from(i + 1))
-  case class TuplePair(val n1: Long, val n2: Long) {
-
-  }
-
+  def from(i: Long): Stream[Long] = Stream.cons(i, from(i + 1))
+  case class TuplePair(n1: Long, n2: Long) {}
   val pairCache = new mutable.HashMap[TuplePair, Boolean]
-
-  def isAllPairsOk(pairs: List[(Int, Int)]) : Boolean = {
-    for (p <- pairs) {
-      val res = pairCache.get(TuplePair(p._1, p._2))
-      res match {
-        case Some(b : Boolean) => if( !b ) return false
-        case None => {
-          val ok = pairConcatenatedIsPrime(p._1, p._2)
-          pairCache.put(TuplePair(p._1, p._2), ok)
-          if (!ok) {
-            return false
-          }
-        }
-      }
-    }
-    println("Omg: 5tuple er kjempeprime! " + pairs)
-    true
-  }
 
   def run(): Int = {
     //val tall = ( 3 to 10000000)
-    lazy val tall = from(3)
+    lazy val tall = from(3L)
     val primtall = tall.filter(t => MathLib.isPrimeFast(t)).take(1000)
+    val pairs = findPairs( primtall )
+    val okPairs =  pairs.filter( p => pairConcatenatedIsPrime(p._1, p._2))
+
+    var parliste = lagliste( okPairs, Nil)
+    println( parliste)
+    -1
+  }
+
+
+
+/*
     var smallestSum = Long.MaxValue
 
     //val primtall = Numbers.filter( t => MathLib.isPrimeFast(t)).take(10000)
@@ -69,7 +60,7 @@ class Euler60 {
       tall.foreach( n => sum = sum + n)
       sum
     }
-
+*/
 
     /*
         val en = primtallArray(first)
@@ -101,8 +92,41 @@ class Euler60 {
 
     //  val summer =
     //riktige.size
-    -1
+  def isAllPairsOk(pairs: List[(Int, Int)]) : Boolean = {
+    for (p <- pairs) {
+      val res = pairCache.get(TuplePair(p._1, p._2))
+      res match {
+        case Some(b : Boolean) => if( !b ) return false
+        case None => {
+          val ok = pairConcatenatedIsPrime(p._1, p._2)
+          pairCache.put(TuplePair(p._1, p._2), ok)
+          if (!ok) {
+            return false
+          }
+        }
+      }
+    }
+    println("Omg: 5tuple er kjempeprime! " + pairs)
+    true
   }
+
+  def findPairs(stream: Stream[Long])  = {
+    val liste = for{
+      i <- stream
+      j <- stream
+      if j>i
+    } yield( i,j)
+    liste
+  }
+
+  @tailrec
+  private def lagliste(stream: Stream[(Long, Long)], liste: List[(Long, Long)]) : List[(Long, Long)] = {
+    stream match{
+      case xs #::xt => lagliste( stream.tail, xs :: liste)
+      case _ => liste
+    }
+  }
+
 
   def isAllFivePrimeConcatenated(candidate: Long) = {
     val knowns = List(3, 7, 109, 673)
