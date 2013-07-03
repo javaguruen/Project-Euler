@@ -12,7 +12,7 @@ class Euler60 {
   def run(): Int = {
     //val tall = ( 3 to 10000000)
     lazy val tall = from(3L)
-    val primtall = tall.filter(t => MathLib.isPrimeFast(t)).take(1000)
+    val primtall = tall.filter(t => MathLib.isPrimeFast(t)).take(1200)
     val pairs = findPairs( primtall )
     val okPairs =  pairs.filter( p => pairConcatenatedIsPrime(p._1, p._2))
 
@@ -25,13 +25,32 @@ class Euler60 {
       map.put( tupple._2, tupple._1 :: valuesP2)
     } )
 
-    var liste3 = map.getOrElse(3L, Nil)
-    var temp = for{
-      a <- liste3
-      b <-liste3 if( b>a )
-      if( map(a).contains(b))
-    } yield (3, a, b)
-    println( temp )
+    val startKey = 7800L
+    var maksKey = Long.MinValue
+    map.keySet.foreach(key => {
+      maksKey = Math.max(key, maksKey)
+      if( key >startKey ){
+      println ("Key= " + key)
+      var liste3 = map.getOrElse(key, Nil)
+      var temp = for{
+        a <- liste3
+        b <-liste3 if( b>a )
+        c <- liste3 if( c > b )
+        d <- liste3 if( d > c )
+        if( map(a).contains(b))
+        if( map(a).contains(c))
+        if( map(b).contains(c))
+        if( map(a).contains(d))
+        if( map(b).contains(d))
+        if( map(c).contains(d))
+        _ = println( "Key="+key)
+      } yield (key, a, b, c, d, key+a+b+c+d)
+      if( temp.size > 0 ) {
+        println( temp )
+      }
+      }
+    } )
+    println("MaksKey = " + maksKey)
     //var minsteKey = map.keySet.foldLeft( Long.MaxValue){ (a,b) => Math.min(a,b)}
     //println( map )
     -1
