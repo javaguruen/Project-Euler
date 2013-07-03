@@ -17,7 +17,23 @@ class Euler60 {
     val okPairs =  pairs.filter( p => pairConcatenatedIsPrime(p._1, p._2))
 
     var parliste = lagliste( okPairs, Nil)
-    println( parliste)
+    val map = new mutable.HashMap[Long, List[Long]]()
+    parliste.foreach( tupple => {
+      var valuesP1 =  map.getOrElse(tupple._1, Nil)
+      map.put( tupple._1, tupple._2 :: valuesP1)
+      var valuesP2 =  map.getOrElse(tupple._2, Nil)
+      map.put( tupple._2, tupple._1 :: valuesP2)
+    } )
+
+    var liste3 = map.getOrElse(3L, Nil)
+    var temp = for{
+      a <- liste3
+      b <-liste3 if( b>a )
+      if( map(a).contains(b))
+    } yield (3, a, b)
+    println( temp )
+    //var minsteKey = map.keySet.foldLeft( Long.MaxValue){ (a,b) => Math.min(a,b)}
+    //println( map )
     -1
   }
 
