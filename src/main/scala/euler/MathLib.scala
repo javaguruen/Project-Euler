@@ -5,6 +5,8 @@ import scala.collection.mutable
 import org.slf4j.{LoggerFactory, Logger}
 
 object MathLib {
+  def isOdd(i: Int): Boolean = { i%2 != 0 }
+
   private val logger: Logger = LoggerFactory.getLogger("MathLib")
 
 
