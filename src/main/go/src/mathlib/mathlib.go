@@ -2,8 +2,8 @@ package mathlib
 
 import (
 	"math"
-//	"fmt"
 //	"strconv"
+//		"fmt"
 )
 
 func SmallestFactor (number int) (int) {
@@ -51,6 +51,29 @@ func AllPrimeFactors(number int) ([]int) {
 		}
 	}
 	return primeFactors
+}
+
+func IsPalindrome(number int) (bool) {
+	//make a slice where each element is a signle digit
+	var digits []int
+	done := false
+
+	for !done {
+		digits = append(digits, number % 10)
+		number = number / 10
+		done = number < 10
+	}
+	digits = append(digits, number)
+
+	//compare the front and back of the slice
+	backwardcounter := len(digits) -1
+	for forwardcounter := 0; forwardcounter < len(digits); forwardcounter++ {
+		if (digits[forwardcounter] != digits[backwardcounter]) {
+			return false
+		}
+		backwardcounter = backwardcounter - 1
+	}
+	return true
 }
 
 
