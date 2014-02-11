@@ -76,4 +76,14 @@ func IsPalindrome(number int) (bool) {
 	return true
 }
 
+func IsDividableByUpToN(number int, n int) (bool){
+	for i:= 1; i<n; i++ {
+		if !(number % i == 0) {
+			return false
+		}
+	}
+
+	return true
+}
+
 

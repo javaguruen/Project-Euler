@@ -33,8 +33,21 @@ func TestIsPalindrome (t *testing.T) {
 	if (IsPalindrome(aNonPalindrome)) {
 		t.Errorf("IsPalindrome claims %s is a palindrome", aNonPalindrome)
 	}
+}
 
+func TestIsDividableUpToN(t *testing.T) {
+	aDividableNumber := 2520
+	aBigDividableNumber := 232792560
 
+	if (!IsDividableByUpToN(aDividableNumber, 10)) {
+		t.Errorf("IsDividableNumber claims %s is NOT dividable by 1-10",aDividableNumber)
+	}
+	if (!IsDividableByUpToN(aBigDividableNumber, 20)) {
+		t.Errorf("IsDividableNumber claims %s is NOT dividable by 1-20",aBigDividableNumber)
+	}
+	if (IsDividableByUpToN(20, 20)) {
+		t.Errorf("IsDividableNumber claims %s is dividable by 1-20",20)
+	}
 }
 
 
