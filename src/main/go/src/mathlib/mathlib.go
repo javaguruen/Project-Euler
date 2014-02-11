@@ -17,7 +17,7 @@ func SmallestFactor (number int) (int) {
 	return -1
 }
 
-func isPrime(number int) (bool) {
+func IsPrime(number int) (bool) {
 	sqrt := int( math.Sqrt( float64(number) ) )
 
 	for i := 2 ; i <= sqrt ; i++ {
@@ -46,7 +46,7 @@ func AllPrimeFactors(number int) ([]int) {
 	var primeFactors []int
 	factors := AllFactors(number)
 	for _,someFactor := range factors {
-		if (isPrime(someFactor)) {
+		if (IsPrime(someFactor)) {
 			primeFactors = append(primeFactors, someFactor)
 		}
 	}

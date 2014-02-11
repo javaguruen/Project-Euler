@@ -8,11 +8,11 @@ func TestIsPrime(t *testing.T) {
 	aPrime := 6857
 	aComposite := 10000
 
-	if (!isPrime(aPrime)) {
+	if (!IsPrime(aPrime)) {
 		t.Errorf("isPrime claims 6857 is not prime")
 	}
 
-	if (isPrime(aComposite)) {
+	if (IsPrime(aComposite)) {
 		t.Errorf("isPrime claims 10000 is prime")
 	}
 }
