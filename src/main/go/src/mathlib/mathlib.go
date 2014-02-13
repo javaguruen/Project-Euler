@@ -32,7 +32,6 @@ func AllFactors (number int) ([]int) {
 	var factors []int
 
 	sqrt := int( math.Sqrt( float64(number) ) )
-//	fmt.Println("Factor: Input n is " + strconv.Itoa(number) + " sqrt of that, integered is " + strconv.Itoa(sqrt))
 
 	for i := 2 ; i <= sqrt ; i++ {
 		if ( math.Mod(float64(number), float64(i)) < 0.00001) {
@@ -93,4 +92,36 @@ func IsPytagoreanTriplet(a int, b int, c int) bool {
 	return (aSquared + bSquared == cSquared)
 }
 
+func Sieve(size int) []int {
+	//create a slice of ints
+	theSieve := make([]int,size)
+	var thePrimes []int
+
+	//fill the thing
+	for i:=1; i< size;i++ {
+		theSieve[i] = i
+	}
+	//crossed out is -1
+	for j:=2;j<size;j++{
+		if (theSieve[j] != -1) {
+			if !IsPrime(j) {
+				crossOutFromHereonOut(theSieve,j)
+			}
+		}
+	}
+
+	//at the end, collect all the remainding numbers that now must be primes
+	for k:= 3; k< size;k++ {
+		if (theSieve[k] != -1) {
+			thePrimes = append(thePrimes, theSieve[k])
+		}
+	}
+	return thePrimes
+}
+
+func crossOutFromHereonOut(sieve[] int, factor int) {
+	for i:=factor; i<len(sieve);i+=factor {
+		sieve[i]=-1
+	}
+}
 

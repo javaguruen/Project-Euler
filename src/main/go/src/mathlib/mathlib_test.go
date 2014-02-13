@@ -2,6 +2,7 @@ package mathlib
 
 import (
 	"testing"
+//	"fmt"
 )
 
 func TestIsPrime(t *testing.T) {
@@ -54,6 +55,13 @@ func TestIsPytagoreanTriplet(t *testing.T) {
 	aPytagoreanTriplet :=  []int{3,4,5}
 	if (!IsPytagoreanTriplet(aPytagoreanTriplet[0],aPytagoreanTriplet[1],aPytagoreanTriplet[2])) {
     	t.Errorf("IsPytagorean claims pytagorean triplet 3,4,5 is not")
+	}
+}
+
+func TestSieve(t *testing.T){
+	primes := Sieve(100)
+	if (len(primes) == 1) {
+		t.Errorf("Error")
 	}
 
 }
