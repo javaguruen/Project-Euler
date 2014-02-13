@@ -50,4 +50,12 @@ func TestIsDividableUpToN(t *testing.T) {
 	}
 }
 
+func TestIsPytagoreanTriplet(t *testing.T) {
+	aPytagoreanTriplet :=  []int{3,4,5}
+	if (!IsPytagoreanTriplet(aPytagoreanTriplet[0],aPytagoreanTriplet[1],aPytagoreanTriplet[2])) {
+    	t.Errorf("IsPytagorean claims pytagorean triplet 3,4,5 is not")
+	}
+
+}
+
 

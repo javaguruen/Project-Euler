@@ -82,8 +82,15 @@ func IsDividableByUpToN(number int, n int) (bool){
 			return false
 		}
 	}
-
 	return true
+}
+
+func IsPytagoreanTriplet(a int, b int, c int) bool {
+	aSquared := a * a
+	bSquared := b * b
+	cSquared := c * c
+
+	return (aSquared + bSquared == cSquared)
 }
 
 
