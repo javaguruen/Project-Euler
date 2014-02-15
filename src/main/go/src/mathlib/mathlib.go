@@ -4,6 +4,8 @@ import (
 	"math"
 //	"strconv"
 //		"fmt"
+	"time"
+	"fmt"
 )
 
 func SmallestFactor (number int) (int) {
@@ -93,6 +95,7 @@ func IsPytagoreanTriplet(a int, b int, c int) bool {
 }
 
 func Sieve(size int) []int {
+	base := time.Now()
 	//create a slice of ints
 	theSieve := make([]int,size)
 	var thePrimes []int
@@ -101,27 +104,34 @@ func Sieve(size int) []int {
 	for i:=1; i< size;i++ {
 		theSieve[i] = i
 	}
+	afterFill := time.Since(base)
+	fmt.Printf("Array filled. Elapsed: %v \n",afterFill)
 	//crossed out is -1
 	for j:=2;j<size;j++{
 		if (theSieve[j] != -1) {
 			if !IsPrime(j) {
-				crossOutFromHereonOut(theSieve,j)
+				crossOutFromHereonOut(theSieve,j,size)
 			}
 		}
 	}
-
+	afterCrosses := time.Since(base)
+	fmt.Printf("Array crossed. Elapsed: %v \n",afterCrosses)
 	//at the end, collect all the remainding numbers that now must be primes
 	for k:= 3; k< size;k++ {
 		if (theSieve[k] != -1) {
 			thePrimes = append(thePrimes, theSieve[k])
 		}
 	}
+	allDone := time.Since(base)
+	fmt.Printf("Result collected. Elapsed: %v \n",allDone)
 	return thePrimes
 }
 
-func crossOutFromHereonOut(sieve[] int, factor int) {
-	for i:=factor; i<len(sieve);i+=factor {
-		sieve[i]=-1
+func crossOutFromHereonOut(sieve[] int, factor int, sievelength int) {
+	for i:=factor; i<sievelength;i+=factor {
+		if (sieve[i] != -1) {
+			sieve[i]=-1
+		}
 	}
 }
 
