@@ -2,7 +2,7 @@ package mathlib
 
 import (
 	"testing"
-//	"fmt"
+	//"fmt"
 )
 
 func TestIsPrime(t *testing.T) {
@@ -63,7 +63,23 @@ func TestSieve(t *testing.T){
 	if (len(primes) == 1) {
 		t.Errorf("Error")
 	}
+}
 
+func TestAllFactors(t *testing.T) {
+	aTriangleNumber := GenerateTriangleNumber(12375)
+	allFactorsForThat := AllFactors(aTriangleNumber)
+
+	if (len(allFactorsForThat) != 576) {
+		t.Errorf("Error: Allfactors says number of factors is %v while it should be 576",len(allFactorsForThat))
+	}
+}
+func TestAllFactors2(t *testing.T) {
+	aTriangleNumber := GenerateTriangleNumber(7)
+	allFactorsForThat := AllFactors(aTriangleNumber)
+
+	if (len(allFactorsForThat) != 6) {
+		t.Errorf("Error: Allfactors says number of factors is %v while it should be 6",len(allFactorsForThat))
+	}
 }
 
 

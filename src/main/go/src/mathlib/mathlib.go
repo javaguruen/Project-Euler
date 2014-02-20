@@ -3,7 +3,6 @@ package mathlib
 import (
 	"math"
 //	"strconv"
-//		"fmt"
 	"time"
 	"fmt"
 )
@@ -33,13 +32,19 @@ func IsPrime(number int) (bool) {
 func AllFactors (number int) ([]int) {
 	var factors []int
 
-	sqrt := int( math.Sqrt( float64(number) ) )
+	sqrt := int(math.Ceil(math.Sqrt(float64(number))))
+
+	factors = append(factors, 1) //Per def 1 is a prime factor of whatever number.
 
 	for i := 2 ; i <= sqrt ; i++ {
 		if ( math.Mod(float64(number), float64(i)) < 0.00001) {
 			factors = append(factors, i)
+			factors = append(factors, (number/i))
 		}
 	}
+	factors = append(factors, number) //Per def number is a prime factor of  number.
+	//TODO: Remove duplicates
+
 	return factors
 }
 
@@ -92,6 +97,14 @@ func IsPytagoreanTriplet(a int, b int, c int) bool {
 	cSquared := c * c
 
 	return (aSquared + bSquared == cSquared)
+}
+
+func GenerateTriangleNumber(base int) int {
+	triangleNumber := 0
+	for i:=1; i<=base;i++{
+		triangleNumber += i
+	}
+	return triangleNumber
 }
 
 func Sieve(size int) []int {
