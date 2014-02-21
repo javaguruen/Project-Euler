@@ -82,4 +82,11 @@ func TestAllFactors2(t *testing.T) {
 	}
 }
 
+func TestCollatzChainLength(t *testing.T) {
+
+	if CollatzChainLength(13) != 10 {
+		t.Errorf("Error: CollatzChainLength claims that CL(13) is not 10 terms long")
+	}
+}
+
 

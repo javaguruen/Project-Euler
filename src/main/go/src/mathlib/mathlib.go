@@ -148,3 +148,31 @@ func crossOutFromHereonOut(sieve[] int, factor int, sievelength int) {
 	}
 }
 
+func CollatzChainLength(initialValue int) int {
+	if (initialValue == 0) {
+		return 0
+	}
+	done := false
+	count := 1 //Initial value is the first chain link
+	currentValue := initialValue
+	for !done {
+		if (currentValue %2 == 0) {
+			currentValue = currentValue / 2
+			if (currentValue != 1) {
+				count ++
+			} else {
+				done = true
+			}
+		} else {
+			currentValue = (currentValue * 3) + 1
+			if (currentValue != 1) {
+				count ++
+			} else {
+				done = true
+			}
+		}
+	}
+	count ++ //The ending 1 also counts as a chain link
+	return count
+}
+
