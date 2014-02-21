@@ -2,6 +2,7 @@ package mathlib
 
 import (
 	"testing"
+	"math/big"
 	//"fmt"
 )
 
@@ -86,6 +87,14 @@ func TestCollatzChainLength(t *testing.T) {
 
 	if CollatzChainLength(13) != 10 {
 		t.Errorf("Error: CollatzChainLength claims that CL(13) is not 10 terms long")
+	}
+}
+
+func TestDigitSum(t *testing.T) {
+	number := big.NewInt(32768)
+	sum := DigitSum(number)
+	if ( sum != 26) {
+		t.Errorf("Error: DigitSum claims the digit sum of 32768 is not 26, but %v", sum)
 	}
 }
 

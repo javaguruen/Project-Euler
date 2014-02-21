@@ -2,9 +2,10 @@ package mathlib
 
 import (
 	"math"
-//	"strconv"
+	"strconv"
 	"time"
 	"fmt"
+	"math/big"
 )
 
 func SmallestFactor (number int) (int) {
@@ -175,4 +176,21 @@ func CollatzChainLength(initialValue int) int {
 	count ++ //The ending 1 also counts as a chain link
 	return count
 }
+
+func DigitSum(number *big.Int) int {
+	sum := 0
+
+	for _,someChar := range number.String() {
+		digitAsString := string(someChar)
+		x,err := strconv.Atoi(digitAsString)
+
+		if err != nil {
+			fmt.Printf("Failed to convert string %v to int\n",err)
+		} else {
+			sum = sum + x
+		}
+	}
+	return sum
+}
+
 
