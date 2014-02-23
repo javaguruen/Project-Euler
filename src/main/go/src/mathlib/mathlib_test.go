@@ -93,9 +93,33 @@ func TestCollatzChainLength(t *testing.T) {
 func TestDigitSum(t *testing.T) {
 	number := big.NewInt(32768)
 	sum := DigitSum(number)
-	if ( sum != 26) {
+	if sum != 26 {
 		t.Errorf("Error: DigitSum claims the digit sum of 32768 is not 26, but %v", sum)
 	}
 }
 
+func TestGetLastDigit(t *testing.T) {
+	someLastDigit := GetLastDigit(99)
+	if someLastDigit != 9 {
+		t.Errorf("Error: GetLastDigit claims last digit of 99 is %v,  not 9", someLastDigit)
+	}
+}
+
+func TestCutLastDigit(t *testing.T) {
+	numberAfterLastDigitCut := CutLastDigit(566)
+	if numberAfterLastDigitCut != 56 {
+		t.Errorf("Error: GetLastDigit claims 566 with last digit cut is  %v,  not 56", numberAfterLastDigitCut)
+	}
+}
+
+func TestIntToOutWrittenBritishNumber(t * testing.T) {
+	testLength := len (IntToOutWrittenBritishNumber(342))
+	if testLength != 23 {
+		t.Errorf("Outwritten number should be 23 chars long, but was %v. Entire number: %v", testLength, IntToOutWrittenBritishNumber(342))
+	}
+	testLength2 := len (IntToOutWrittenBritishNumber(115))
+	if testLength2 != 20 {
+		t.Errorf("Outwritten number should be 20 chars long, but was %v. Entire number: %v", testLength2, IntToOutWrittenBritishNumber(115))
+	}
+}
 

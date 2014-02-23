@@ -3,7 +3,7 @@ package mathlib
 import (
 	"math"
 	"strconv"
-	"time"
+//	"time"
 	"fmt"
 	"math/big"
 )
@@ -109,7 +109,7 @@ func GenerateTriangleNumber(base int) int {
 }
 
 func Sieve(size int) []int {
-	base := time.Now()
+	//base := time.Now()
 	//create a slice of ints
 	theSieve := make([]int,size)
 	var thePrimes []int
@@ -118,8 +118,7 @@ func Sieve(size int) []int {
 	for i:=1; i< size;i++ {
 		theSieve[i] = i
 	}
-	afterFill := time.Since(base)
-	fmt.Printf("Array filled. Elapsed: %v \n",afterFill)
+	//afterFill := time.Since(base)
 	//crossed out is -1
 	for j:=2;j<size;j++{
 		if (theSieve[j] != -1) {
@@ -128,16 +127,14 @@ func Sieve(size int) []int {
 			}
 		}
 	}
-	afterCrosses := time.Since(base)
-	fmt.Printf("Array crossed. Elapsed: %v \n",afterCrosses)
+	//afterCrosses := time.Since(base)
 	//at the end, collect all the remainding numbers that now must be primes
 	for k:= 3; k< size;k++ {
 		if (theSieve[k] != -1) {
 			thePrimes = append(thePrimes, theSieve[k])
 		}
 	}
-	allDone := time.Since(base)
-	fmt.Printf("Result collected. Elapsed: %v \n",allDone)
+	//allDone := time.Since(base)
 	return thePrimes
 }
 
@@ -191,6 +188,125 @@ func DigitSum(number *big.Int) int {
 		}
 	}
 	return sum
+}
+
+func IntToOutWrittenBritishNumber(number int) string {
+	someDigit := GetLastDigit(number)
+	number = CutLastDigit(number)
+	var allDigits []int
+	allDigits = append(allDigits,someDigit)
+
+	for number > 0 {
+		someDigit = GetLastDigit(number)
+		number = CutLastDigit(number)
+		allDigits = append(allDigits,someDigit)
+	}
+
+	if len(allDigits) == 1 {
+		return Ones(allDigits[0])
+	}
+
+	if len(allDigits) == 2 {
+		return Tens(allDigits[0] + allDigits[1]*10)
+	}
+
+	if len(allDigits) == 3 {
+		return Hundreds(allDigits[2], allDigits[1], allDigits[0])
+	}
+
+	if len(allDigits) == 4 {
+		return Thousands(allDigits[3], allDigits[2], allDigits[1], allDigits[0])
+	}
+	return "error"
+}
+
+func Thousands(thousandDigit int, hundredDigit int, tendigit int, singledigit int) string {
+	return (Ones(thousandDigit) + "thousand" + Hundreds(hundredDigit, tendigit, singledigit))
+}
+
+func Hundreds(hundredDigit int, tendigit int, singledigit int) string {
+	hundredPart := ""
+
+	if (hundredDigit > 0) {
+		hundredPart = "hundred"
+		if (tendigit > 0 || singledigit > 0) {
+			hundredPart += "and"
+		}
+	}
+
+	if tendigit > 0 {
+		return Ones(hundredDigit) + hundredPart + Tens(tendigit * 10 + singledigit)
+	} else {
+		return Ones(hundredDigit) + hundredPart + Ones(singledigit)
+	}
+}
+
+func Tens(number int) string {
+	ret := ""
+	lastDigit := GetLastDigit(number)
+	firstDigit := GetLastDigit(CutLastDigit(number)) //Assume only 2 digits
+
+	if number > 9 && number< 20 {
+	    switch lastDigit {
+		case 0 :	ret = "Ten"
+		case 1 :	ret = "Eleven"
+		case 2 :	ret = "Twelve"
+		case 3 : 	ret = "Thirteen"
+		case 4 :	ret = "Fourteen"
+		case 5 :	ret = "Fifteen"
+		case 6 :	ret = "Sixteen"
+		case 7 :	ret = "Seventeen"
+		case 8 :	ret = "Eighteen"
+		case 9 :	ret = "Nineteen"
+		}
+	}
+
+	if number >= 20 {
+		switch firstDigit {
+			case 2 : 	ret = "Twenty"
+			case 3 :	ret = "Thirty"
+			case 4 :	ret = "Forty"
+			case 5 :	ret = "Fifty"
+			case 6 :	ret = "Sixty"
+			case 7 :	ret = "Seventy"
+			case 8 :	ret = "Eighty"
+			case 9 :	ret = "Ninety"
+		}
+
+		ret = ret + Ones(lastDigit)
+
+	}
+
+	return ret
+}
+
+func Ones(number int) string {
+	ret :=""
+	switch number {
+		case 1 :	ret = "One"
+		case 2 :	ret = "Two"
+		case 3 : 	ret = "Three"
+		case 4 :	ret = "Four"
+		case 5 :	ret = "Five"
+		case 6 :	ret = "Six"
+		case 7 :	ret = "Seven"
+		case 8 :	ret = "Eight"
+		case 9 :	ret = "Nine"
+	}
+	return ret
+}
+
+func GetLastDigit(number int) int {
+	if number < 10 {
+		return number
+	}
+	divBy10 := number / 10
+	numberSansLastDigitValue := divBy10 * 10
+	return number - numberSansLastDigitValue
+}
+
+func CutLastDigit(number int) int {
+	return number / 10
 }
 
 
