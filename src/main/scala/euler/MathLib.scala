@@ -9,8 +9,21 @@ object MathLib {
 
   private val logger: Logger = LoggerFactory.getLogger("MathLib")
 
+  def isSquareNumber(n: Int): Boolean = {
+    val kvad = Math.sqrt(n.toDouble)
+    Math.abs(kvad - Math.round(kvad).toDouble) < 0.001
+  }
 
-  def summer(liste : List[Long] ) : Long = liste.foldLeft(0l) { (s, e) => s + e } 
+  def isSquareNumber(n: Long): Boolean = {
+    val kvad = Math.sqrt(n.toDouble)
+    Math.abs(kvad - Math.round(kvad)) < 0.0000000000000001
+  }
+
+  def isHeltall(n: Double): Boolean = {
+    Math.abs(n - Math.round(n)) < 0.0000000000000001
+  }
+
+  def summer(liste : List[Long] ) : Long = liste.foldLeft(0l) { (s, e) => s + e }
 
 
   def selectRfromN(r: Int, n: Int): BigInt = {

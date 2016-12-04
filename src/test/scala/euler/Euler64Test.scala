@@ -41,22 +41,6 @@ class Euler64Test extends FunSuite with BeforeAndAfter {
     assert(p._3 === 5, "periode")
   }
 
-  test("64 er kvadrattall"){
-    assert(euler.isSquareNumber(64) )
-  }
-
-  test("4 er kvadrattall"){
-    assert(euler.isSquareNumber(4) )
-  }
-
-  test("5 er ikke kvadrattall"){
-    assert(!euler.isSquareNumber(5) )
-  }
-
-  test("63 er ikke kvadrattall"){
-    assert( !euler.isSquareNumber(63) , "Skal være kvadrattall")
-  }
-
   test("Største heltall for 23 er 4"){
     assert(euler.heltallet(23) === 4 )
   }

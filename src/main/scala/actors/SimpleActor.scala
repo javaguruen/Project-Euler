@@ -2,6 +2,7 @@ package actors
 
 import scala.actors.Actor
 
+
 object Coordinator{
   def main(args : Array[String] ) {
     val actor = new Coordinator

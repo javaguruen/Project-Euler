@@ -10,7 +10,7 @@ class Euler64 {
     var antallOdde = 0
     for ( i <- 2 to n){
       //println(" antall Odde i=" + i)
-      if( !isSquareNumber(i)){
+      if( !MathLib.isSquareNumber(i)){
         val p = pattern(i)
         if( MathLib.isOdd( p._3 ) ){
           antallOdde += 1
@@ -74,11 +74,6 @@ class Euler64 {
     numberOfOddPeriods(10000)
   }
 
-
-  def isSquareNumber(n: Int): Boolean = {
-    val kvad = Math.sqrt(n.toDouble)
-    return Math.abs(kvad - Math.round(kvad).toDouble) < 0.000001
-  }
 
   def heltallet(n: Int): Int = Math.sqrt(n.toDouble).floor.toInt
 }
