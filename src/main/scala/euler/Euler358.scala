@@ -68,7 +68,7 @@ class Euler358 {
       }
 
     }
-    println("Found = " + found.size)
+    //println("Found = " + found.size)
     found.foreach( n => println(n))
     0L
   }

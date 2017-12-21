@@ -5,7 +5,7 @@ object MainObject{
   def main(args : Array[String])  {
     val start = new Date()
     println( "Starter kjøring: " + start)
-    val euler = new Euler23()
+    val euler = new Euler31()
 
     val resultat = euler.run()
     val ferdig = new Date()

@@ -1,8 +1,10 @@
 package euler
 
 import _root_.java.math.BigInteger
+
+import org.slf4j.{Logger, LoggerFactory}
+
 import scala.collection.mutable
-import org.slf4j.{LoggerFactory, Logger}
 
 object MathLib {
   def isOdd(i: Int): Boolean = { i%2 != 0 }
@@ -39,7 +41,7 @@ object MathLib {
 */
     val retur = (teller / nevner)
     if( retur <= new BigInt( new BigInteger("0")) ){
-      println ("Retur negativ for r=" + r + " n=" + n)
+      //println ("Retur negativ for r=" + r + " n=" + n)
     }
     retur
   }
@@ -160,20 +162,21 @@ object MathLib {
    */
   def properDivisors(tall: Long): List[Long] = {
     var factors: List[Long] = 1 :: Nil
-    var max = scala.math.ceil(scala.math.sqrt(tall.doubleValue))
+    var max = scala.math.ceil(scala.math.sqrt(tall.toDouble))
     var i = 2
 
     do {
       val divisor: Long = tall % i
       if (divisor == 0) {
-        factors = (tall/i) :: factors
+        val t: Long = (tall/i)
+        factors =  t :: factors
         factors = i :: factors
       }
       i += 1
     } while (i <= max)
-    factors = factors.sortWith( (a,b) => a<b)
-    factors = factors.removeDuplicates
-    factors
+    val k : List[Long] = factors.sortWith(_<_) //{ (a,b) => a<b }
+    val l : List[Long] = k.toSet.toList //().asInstanceOf[List[Long]]
+    l
   }
 /*
   @Deprecated("Bruk properDivisors(Long): List[Long]")
@@ -237,7 +240,7 @@ object MathLib {
     for ( i <- 1 until 50){
       sum = MathLib.reverseAndAdd( sum )
       if ( isPalindrome( sum ) ){
-        println ("Candidate " + candidate + " is palindrome (" + sum + " after " + i + " reverseAndAdd")
+        //println ("Candidate " + candidate + " is palindrome (" + sum + " after " + i + " reverseAndAdd")
         return false
       }
     }

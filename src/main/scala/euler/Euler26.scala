@@ -34,9 +34,9 @@ class Euler26 {
   def detectCycle(input : String) : Int =  {
     for (offset <- 2 to 10) {
       for (cycleLength <- 1 to 2000) {
-        logger.debug("Leter etter sykellengde " + cycleLength + " med offsett " + offset)
+        //logger.debug("Leter etter sykellengde " + cycleLength + " med offsett " + offset)
         if (detectSingleCycle(offset, cycleLength, input)) {
-          logger.debug("Fant sykkel på offset " + offset + " med lengde "+ cycleLength)
+          //logger.debug("Fant sykkel på offset " + offset + " med lengde "+ cycleLength)
           return cycleLength
         }
       }

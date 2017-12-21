@@ -42,35 +42,35 @@ object RomanNummerals {
   C can only be placed before D and M.
    */
   def convert(tall: Int): String = {
-    var rest = tall;
+    var rest = tall
     romertall = ""
 
-    rest = taVekk(rest, 1000, "M");
-    rest = taVekk(rest, 900, "CM");
-    rest = taVekk(rest, 500, "D");
-    rest = taVekk(rest, 400, "CD");
-    rest = taVekk(rest, 100, "C");
-    rest = taVekk(rest, 90, "XC");
-    rest = taVekk(rest, 50, "L");
-    //rest = taVekk(rest, 49, "IL");
-    rest = taVekk(rest, 40, "XL");
-    rest = taVekk(rest, 10, "X");
-    rest = taVekk(rest, 9, "IX");
-    rest = taVekk(rest, 5, "V");
-    rest = taVekk(rest, 4, "IV");
-    rest = taVekk(rest, 1, "I");
+    rest = taVekk(rest, 1000, "M")
+    rest = taVekk(rest, 900, "CM")
+    rest = taVekk(rest, 500, "D")
+    rest = taVekk(rest, 400, "CD")
+    rest = taVekk(rest, 100, "C")
+    rest = taVekk(rest, 90, "XC")
+    rest = taVekk(rest, 50, "L")
+    //rest = taVekk(rest, 49, "IL")
+    rest = taVekk(rest, 40, "XL")
+    rest = taVekk(rest, 10, "X")
+    rest = taVekk(rest, 9, "IX")
+    rest = taVekk(rest, 5, "V")
+    rest = taVekk(rest, 4, "IV")
+    rest = taVekk(rest, 1, "I")
 
-    romertall;
+    romertall
   }
 
   def taVekk(rest: Int, taVekk: Int, rtall: String): Int = {
     var r = rest
-    val temp = r / taVekk;
+    val temp = r / taVekk
     if (temp > 0) {
       for (i <- 0 until temp) {
-        romertall += rtall;
+        romertall += rtall
       }
-      r -= (temp * taVekk);
+      r -= (temp * taVekk)
     }
     r
   }
