@@ -25,8 +25,8 @@ class Euler31 {
         p10 <- 0 to (target-p200-p100-p50- p20) by 10;
         p5 <- 0 to (target-p200-p100-p50- p20-p10) by 5;
         p2 <- 0 to (target-p200-p100-p50- p20-p10-p5) by 2;
-        p1 <- 0 to (target-p200-p100-p50- p20-p10-p5-p2) by 1;
-        if (List(p1, p2, p5, p10, p20, p50, p100, p200).sum == target))
+        p1 <- 0 to (target-p200-p100-p50- p20-p10-p5-p2) by 1
+        if List(p1, p2, p5, p10, p20, p50, p100, p200).sum == target)
         yield Coins(p1, p2, p5, p10, p20, p50, p100, p200)
     println(possibilities.toList)
 
