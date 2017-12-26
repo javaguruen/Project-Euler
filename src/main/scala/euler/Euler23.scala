@@ -12,17 +12,12 @@ class Euler23 {
       val sum = summer(devisors)
       //      println("sum[" + i + "] = " + sum)
       if (sum > i) {
-        println("OMG! abundant number! " + i + " " + sum)
         abundantList = i :: abundantList
       }
     }
-    println("Abundanter ( " + abundantList.size + ") " + abundantList)
     alleSummer = summerAlleMuligeKombinasjonerAvAbundanteTall(abundantList)
-    println("Alle summer " + alleSummer);
     val heltallIkkeSumAvToAbundant = finnAlleHeltallIkkeSumAvAbundant( alleSummer, maks )
-    println("Alle heltall ikke sum: " + heltallIkkeSumAvToAbundant)
     var sumAlle = heltallIkkeSumAvToAbundant.foldLeft(0){ _ + _}
-    println("Sum alle som ikke er sum av ... " + sumAlle)
     sumAlle
   }
 

@@ -6,20 +6,16 @@ class Euler21 {
     var sumD : Array[Int] = new Array[Int](10001);
     for( i <- 1 until 10000){
       val devisors = MathLib.properDivisors( i.longValue() )
-      println ("devisors: " + devisors)
       val sum = summer(devisors)
-      println ("sum[" + i + "] = " + sum)
       sumD(i) = sum
       if (sum != i) {
         if (sum < i ) {
           if (sumD(sum) == i) {
-            println("OMG! par! " + i + " " + sum )
             vennligsum = vennligsum + i + sum
           }
         }
       }
     }
-    println("Vennligsum" + vennligsum)
     vennligsum
   }
 
@@ -33,12 +29,11 @@ class Euler21 {
 
   def fakultet(n: Int): BigInt = {
     if (n == 1) {
-      return 1
+      1
     }
     else {
       var p : BigInt = fakultet(n - 1) * n
-      println(p);      
-      return p
+      p
     }
   }
 }

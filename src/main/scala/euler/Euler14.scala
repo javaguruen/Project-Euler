@@ -20,9 +20,9 @@ class Euler14 {
         print( " "+ startingNumber)
       }
     } while (startingNumber < 1000000)
-    println
-    println("Teh longest chain!: " + longestChain)
-    printList(longestChainLol)
+    //println
+    //println("Teh longest chain!: " + longestChain)
+    //printList(longestChainLol)
     longestChain
   }
 
@@ -42,7 +42,6 @@ class Euler14 {
 
   def printList(theList: List[Long]): Unit = {
     theList.foreach(n => print(n + " "))
-    println
   }
 
 }

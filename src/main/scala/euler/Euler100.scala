@@ -26,25 +26,25 @@ class Euler100 {
       val temp = value.doubleValue()
       //val temp = 1L + (2L * n * (n - 1))
       if( temp < 0 ){
-        println(" temp=" + temp)
+        //println(" temp=" + temp)
         System.exit(-100)
       }
       val blueD = (1.0 + Math.sqrt(temp)) / 2.0
       if (MathLib.isHeltall(blueD)) {
         val blue = blueD.toLong
         val red = (n - blue)
-        print(s"Potensiell n=${n} blå = ${blue} temp=${temp} ")
+        //print(s"Potensiell n=${n} blå = ${blue} temp=${temp} ")
         if (prob2Blue(blue, red) > 0.040) {
           val myFormatter = new DecimalFormat("###.##")
           val bOut = myFormatter.format(blue)
           val rOut = myFormatter.format(red)
           val prob = prob2Blue(blue, red)
           val probOut = myFormatter.format(prob)
-          printf("Blue=%s red=%s\n", bOut, rOut)
-          printf(s"Prob(${blue}, ${red})=%s\n", new BigDecimal(prob).toPlainString())
+          //printf("Blue=%s red=%s\n", bOut, rOut)
+          //printf(s"Prob(${blue}, ${red})=%s\n", new BigDecimal(prob).toPlainString())
           return (blue, red)
         } else {
-          println("**** Feil sannsynlighet")
+          //println("**** Feil sannsynlighet")
           n += 1
         }
       } else {

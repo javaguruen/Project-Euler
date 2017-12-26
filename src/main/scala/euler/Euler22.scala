@@ -13,11 +13,9 @@ class Euler22 {
     val iterator: Iterator[_root_.scala.Predef.String] = Source.fromFile("euler22.txt").getLines
     while (iterator.hasNext) {
       val navn = iterator.next
-      println(navn)
       navneliste = navneliste.insert(navn)
     }
 
-    println("-------------")
     var i = 1
     var sumTilNaa : Int = 0
     navneliste.foldLeft(0) {
@@ -28,7 +26,6 @@ class Euler22 {
         sumTilNaa
       }
     }
-    println (sumTilNaa)
     sumTilNaa
   }
 

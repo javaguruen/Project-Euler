@@ -40,7 +40,7 @@ class Euler50 {
       if  (numberOfConsecPrimes > maxNumberOfPrimes){
         maxNumberOfPrimes = numberOfConsecPrimes
         maxFoundSum = sum
-        println("Found new max: antall="+maxNumberOfPrimes + " sum="+maxFoundSum)
+        //println("Found new max: antall="+maxNumberOfPrimes + " sum="+maxFoundSum)
       }
     }
     (maxNumberOfPrimes, maxFoundSum)

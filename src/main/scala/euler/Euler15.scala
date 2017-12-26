@@ -15,7 +15,6 @@ class Euler15 {
     var edged=0
 
     logger.info("Starter kjøring")
-    println( kart )
     val dim: Int = 21
     for( i <-0 until dim){
       kart(i) = new Array[Long](dim)
@@ -35,7 +34,6 @@ class Euler15 {
     }
 
     val antallStier = kart(dim - 1)(dim - 1)
-    println( antallStier)
     antallStier
   }
 

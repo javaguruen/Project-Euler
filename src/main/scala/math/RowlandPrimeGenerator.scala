@@ -1,8 +1,8 @@
 package math
 
 import java.util.Date
-import collection.SortedSet
-import collection.immutable.TreeSet
+
+import scala.collection.immutable.TreeSet
 
 object RowlandPrimeGenerator{
   def main(args : Array[String]){

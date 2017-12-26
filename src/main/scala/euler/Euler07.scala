@@ -15,7 +15,7 @@ class Euler07 {
     var i = 3
     do {
       if (MathLib.isPrime(i)) {
-        println(i+" er et primtall, det " + (primeCounter +1) + " i rekken")
+        //println(i+" er et primtall, det " + (primeCounter +1) + " i rekken")
         primeCounter += 1
       }
       i += 1

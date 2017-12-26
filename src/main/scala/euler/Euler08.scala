@@ -31,7 +31,7 @@ class Euler08 {
       var prod = getProdHorisontal(x)
       maks = max(prod, maks)
     }
-    println("Maks produkt=" + maks )
+    //println("Maks produkt=" + maks )
     maks
   }
 

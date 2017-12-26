@@ -12,11 +12,11 @@ class Euler10 {
         antallPrimtall += 1
         primSum += i
         listOfPrimes = i :: listOfPrimes
-        println("Primtall: " + i + " sum saa langt " + primSum)
+        //println("Primtall: " + i + " sum saa langt " + primSum)
       }
       i += 2
     } while (i < maks)
-    println( listOfPrimes )
+    //println( listOfPrimes )
     primSum
   }
 }

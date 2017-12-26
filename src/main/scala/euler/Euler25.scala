@@ -9,14 +9,9 @@ class Euler25 {
     var n = 1
     while (!ferdig) {
       svar = fibo(n)
-      println ("f(" + n + ") = " + svar)
       ferdig = svar.toString.length >= 1000
       n = n + 1
     }
-    println("Fibo svar er " + svar)
-    println("N er " + (n - 1));
-
-
     0
   }
 

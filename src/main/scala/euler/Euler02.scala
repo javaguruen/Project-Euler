@@ -25,10 +25,8 @@ class Euler02() {
 
     do {
       newFibo = fibo1 + fibo2;
-      println("Raw fibonacci: " + newFibo)
       if (newFibo % 2 == 0 && newFibo < maksFibo) {
         sum = sum + newFibo;
-        println("   sum " + sum)
       }
       fibo1 = fibo2;
       fibo2 = newFibo;

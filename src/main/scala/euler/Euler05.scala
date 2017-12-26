@@ -29,7 +29,7 @@ class Euler05 {
     
     var loesning  = 0
     loesning = delbar(maks, numbers, loesning)
-    println ("Losningen er " + loesning)
+    //println ("Losningen er " + loesning)
 
   }
 

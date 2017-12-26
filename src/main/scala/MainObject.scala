@@ -1,4 +1,5 @@
 import _root_.java.util.Date
+
 import euler._
 
 object MainObject{

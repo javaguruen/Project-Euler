@@ -11,12 +11,12 @@ class Euler56 {
       for (exponent <- 1 until maks) {
         val produkt = MathLib.bigPow(base, exponent)
         if  (produkt <  bigZero){
-          println("******  negativt produkt *********")
+          //println("******  negativt produkt *********")
         }
         val tverrsum = MathLib.bigTverrsum(produkt)
         if  ( tverrsum > maxTverrsum ){
-          println(base + " opphøyd i " + exponent + " = " + produkt)
-          println("tverrsummen = " + tverrsum )
+          //println(base + " opphøyd i " + exponent + " = " + produkt)
+          //println("tverrsummen = " + tverrsum )
           maxTverrsum = tverrsum
         }
       }

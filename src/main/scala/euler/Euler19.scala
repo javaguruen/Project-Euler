@@ -1,13 +1,12 @@
 package euler
 
-import java.util.{Date, Calendar, GregorianCalendar}
+import java.util.{Calendar, GregorianCalendar}
 
 
 class Euler19 {
 
   def run(): Long = {
     var startDato = new GregorianCalendar(1901, 0, 6)
-    println( startDato.getTime )
     var sluttDato = new GregorianCalendar(2001, 1, 1)
     var antallSondager = 0;
     while (startDato.before(sluttDato)) {

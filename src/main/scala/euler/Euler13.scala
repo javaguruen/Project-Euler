@@ -1,7 +1,6 @@
 package euler
 
-import scala.math.max
-import io.Source
+import scala.io.Source
 
 class Euler13 {
 
@@ -13,10 +12,6 @@ class Euler13 {
       val tall = BigInt(tallString)
       sum += tall
     }
-    println( "sum=" + sum)
-    println( "sum10=" + sum.toString.substring(0, 10))
-
-
     0L
   }
 }

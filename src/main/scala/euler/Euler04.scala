@@ -10,12 +10,12 @@ class Euler04 {
         if ( MathLib.isPalindrome (candidate)) {
           if (candidate > largest) {
             largest = candidate
-            println(candidate)
+            //println(candidate)
           }
         }
       }
     }
-    println("OMG LARGEST! : "+largest)
+    //println("OMG LARGEST! : "+largest)
   }
 
 }

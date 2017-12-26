@@ -40,7 +40,7 @@ class Euler11 {
         }
       }
     }
-    println("Maks produkt=" + maks + " for punktet(" + maksX + ", " + maksY + ")")
+    //println("Maks produkt=" + maks + " for punktet(" + maksX + ", " + maksY + ")")
     maks
   }
 
