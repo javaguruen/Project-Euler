@@ -1,0 +1,22 @@
+//name := "Project Euler"
+
+lazy val commonSettings = Seq(
+  organization := "org.myproject",
+  version := "0.1.0",
+  // set the Scala version used for the project
+  scalaVersion := "2.12.4"
+)
+
+
+libraryDependencies += "org.scalatest" % "scalatest_2.12" % "3.0.4" % "test"
+
+lazy val root = (project in file("."))
+  .settings(
+    commonSettings,
+
+    // set the name of the project
+    name := "My Project",
+
+    // set the main Scala source directory to be <base>/src
+    scalaSource in Compile := baseDirectory.value / "src/main/scala"
+)
