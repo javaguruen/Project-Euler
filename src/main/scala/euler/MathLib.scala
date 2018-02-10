@@ -4,6 +4,7 @@ import _root_.java.math.BigInteger
 
 import org.slf4j.{Logger, LoggerFactory}
 
+import scala.annotation.tailrec
 import scala.collection.mutable
 
 object MathLib {
@@ -100,6 +101,86 @@ object MathLib {
     val result = List.range(2, primeMax)
     val primes = result.filter( isPrimeFast( _ ))
     primes
+  }
+
+  def fibonacci(n: Long): BigInt ={
+
+    @tailrec
+    def fibo(i: Long, n: Long, fn1: BigInt, fn2: BigInt): BigInt = {
+      if( fn1 < 0){
+        throw new RuntimeException(s"Negative number i=$i -> overflow")
+      }
+      if (i < n){
+        fibo(i+1, n, fn1+fn2, fn1)
+      } else {
+        fn1 + fn2
+      }
+    }
+
+    n match {
+      case 1 => BigInt(1)
+      case 2 => BigInt(1)
+      case _ => fibo(3, n, BigInt(1), BigInt(1))
+    }
+
+  }
+
+  def sieve(n: Int): List[Int] = {
+    val nsArray = (0 to n).toArray
+    for( i <- 2 to n){
+      if( i != -1){
+        var c = 2
+        while( i*c <= n){
+          //println(s"$i is prime. Clearing ${i*c}")
+          nsArray(i*c) = -1
+          c += 1
+        }
+      }
+    }
+
+    nsArray.filter(n => n>=2).toList
+
+    /*
+    func Sieve(size int) []int {
+	//base := time.Now()
+	//create a slice of ints
+	theSieve := make([]int,size)
+	var thePrimes []int
+
+	//fill the thing
+	for i:=1; i< size;i++ {
+		theSieve[i] = i
+	}
+	//afterFill := time.Since(base)
+	//crossed out is -1
+	for j:=2;j<size;j++{
+		if (theSieve[j] != -1) {
+			if !IsPrime(j) {
+				crossOutFromHereonOut(theSieve,j,size)
+			}
+		}
+	}
+	//afterCrosses := time.Since(base)
+	//at the end, collect all the remainding numbers that now must be primes
+	for k:= 3; k< size;k++ {
+		if (theSieve[k] != -1) {
+			thePrimes = append(thePrimes, theSieve[k])
+		}
+	}
+	//allDone := time.Since(base)
+	return thePrimes
+}
+
+func crossOutFromHereonOut(sieve[] int, factor int, sievelength int) {
+	for i:=factor; i<sievelength;i+=factor {
+		if (sieve[i] != -1) {
+			sieve[i]=-1
+		}
+	}
+}
+
+     */
+
   }
 
   def triangleNumber(tall: Long): Long = {
@@ -202,7 +283,7 @@ object MathLib {
 
   def isPandigital(tall: String): Boolean = {
     if (tall.contains("0")) {
-      return false;
+      return false
     }
     var maps = mutable.Map.empty[Char, Char]
     for (i <- 0 until tall.length ) {

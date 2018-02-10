@@ -4,6 +4,38 @@ import org.scalatest.FunSuite
 
 class MathLibTest extends FunSuite {
 
+  test("fibo(1) == 1"){
+    assert( MathLib.fibonacci(1) === 1)
+  }
+
+  test("fibo(2) == 1"){
+    assert( MathLib.fibonacci(2) === 1)
+  }
+
+  test("fibo(3) == 2"){
+    assert( MathLib.fibonacci(3) === 2)
+  }
+
+  test("fibo(4) == 3"){
+    assert( MathLib.fibonacci(4) === 3)
+  }
+
+  test("fibo(5) == 5"){
+    assert( MathLib.fibonacci(5) === 5)
+  }
+
+  test("fibo(541) == xxxxxx"){
+    val f541 = MathLib.fibonacci(541)
+    assert( f541 === BigInt("51621232927393794428283281722302417684416215565352081372219649050894399902811978842493025898332777796978839725641") )
+    val last9 = f541.toString().takeRight(9)
+    assert( last9 === "839725641")
+    assert( MathLib.isPandigital(last9))
+  }
+
+  test("isPrime"){
+    assert( MathLib.isPrimeFast(100333))
+  }
+
   test("pentagonalTest") {
     // Uses ScalaTest assertions
     assert(1 == MathLib.pentagonal(1))
@@ -89,4 +121,8 @@ class MathLibTest extends FunSuite {
     assert(!MathLib.isSquareNumber(63), "Skal være kvadrattall")
   }
 
+  test("Sieve"){
+    val primesBelow29 = MathLib.sieve(29)
+    println(primesBelow29)
+  }
 }
