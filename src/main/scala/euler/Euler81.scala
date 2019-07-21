@@ -25,7 +25,7 @@ class Euler81 {
     }
       for (row <- dim - 1 to 0 by -1) {
         for (col <- dim - 1 to 0 by -1) {
-        //println("col=" + col + " row=" + row + "value=" + alines(row)(col))
+        //println("col=" + col + " row=" + row + "valor=" + alines(row)(col))
         val value = alines(row)(col).toInt
         var rightValue = Int.MaxValue
         var downValue = Int.MaxValue
