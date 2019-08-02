@@ -6,7 +6,7 @@ object MainObject{
   def main(args : Array[String])  {
     val start = new Date()
     println( "Starter kjøring: " + start)
-    val euler = new Euler0087()
+    val euler = new Euler0076()
 
     val resultat = euler.run()
     val ferdig = new Date()
@@ -15,4 +15,3 @@ object MainObject{
     println("Resultat = " + resultat)
   }
 }
-//n=2.000.000 sum=1661123099 tid(s)=151

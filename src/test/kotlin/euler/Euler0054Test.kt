@@ -4,7 +4,6 @@ import euler.euler054Utils.*
 import euler.euler054Utils.Suit.*
 import org.junit.Ignore
 import org.junit.Test
-import kotlin.test.Ignore
 
 class Euler0054Test {
     val e54 = Euler0054()
