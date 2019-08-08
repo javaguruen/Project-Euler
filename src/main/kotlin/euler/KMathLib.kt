@@ -25,6 +25,17 @@ object KMathLib {
                 .toSet()
     }
 
+    fun noCommonDivisor(a: Long, b: Long): Boolean {
+        var n1 = a
+        var n2 = b
+        while (n1 != n2) {
+            if (n1 > n2)
+                n1 -= n2
+            else
+                n2 -= n1
+        }
+        return n1 == 1L
+    }
 
     fun allPrimesInRange(primeMax: Int) : List<Int> {
         return (2 .. primeMax)
