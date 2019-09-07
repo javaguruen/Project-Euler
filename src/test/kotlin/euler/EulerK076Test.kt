@@ -4,7 +4,7 @@ import org.junit.Ignore
 import org.junit.Test
 
 class EulerK076Test {
-    val euler076 = EulerK076()
+    val euler076 = EulerK076BF()
 
     @Test
     fun `Combos of 4`(){

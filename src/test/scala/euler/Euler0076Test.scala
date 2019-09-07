@@ -3,8 +3,13 @@ package euler
 import org.scalatest.FunSuite
 
 class Euler0076Test extends FunSuite {
+  val euler = new Euler0076
+
+  test("Running"){
+    euler.run()
+  }
+
   test("Sorting array") {
-    val euler = new Euler0076
     assert(euler.sort(List(3, 2, 5)) == List(2, 3, 5))
   }
 

@@ -9,7 +9,22 @@ class Euler0076 extends Slf4jLogger {
 
   var series = Map(1 -> Set(List[Int](1)))
 
+  def findCombosStartingWith(n: Int, maxAllowed: Int, sumToAchieve: Int) = {
+    println(s"Finding combos starting with $n, max value: $maxAllowed sum: $sumToAchieve")
+    if( maxAllowed == sumToAchieve){
+
+    }
+  }
+
   def run(): Long = {
+    for (i <- max-1 to 2 by -1){
+      findCombosStartingWith(n = i, maxAllowed = max - i, sumToAchieve = max - i)
+    }
+
+    42L
+  }
+
+  def run2(): Long = {
     for (n <- 2 to max) {
       logger.info(s"##############\nCalculating $n")
       logger.info(s"Map is \n$series")
@@ -53,17 +68,17 @@ class Euler076Take2 {
 
   def findSeries(target: Int): Int = {
     var c = 0
-    Range.inclusive(target-1, 1, -1).foreach{ i =>
+    Range.inclusive(target - 1, 1, -1).foreach { i =>
       println(s"i == $i")
       c += findSubSeries(target - i, i, 0)
     }
 
     @tailrec
-    def findSubSeries(rest: Int, max: Int, count: Int): Int ={
+    def findSubSeries(rest: Int, max: Int, count: Int): Int = {
       /*if( rest == 1 ) {
         //Sum med +1 er eneste valg
         count + 1
-      } else*/ if( rest == 0 ) {
+      } else*/ if (rest == 0) {
         //Ikke flere kombinasjoner
         count
       }
