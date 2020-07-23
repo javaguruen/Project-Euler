@@ -10,7 +10,7 @@ class Euler12 {
     do {
       triangle = MathLib.triangleNumber(i)
       factorCount = MathLib.allFactors(triangle).size + 2
-      maksFactorCount = scala.math.max(maksFactorCount, factorCount)
+      //maksFactorCount = scala.math.max(maksFactorCount, factorCount)
       //println("Maks: " + maksFactorCount + " i: " + i + " Triangeltall: " + triangle + " har antall faktorer " + factorCount)
       i += 1
     } while (factorCount < maks)

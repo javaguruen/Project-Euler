@@ -4,6 +4,33 @@ import kotlin.math.ceil
 import kotlin.math.sqrt
 
 object KMathLib {
+
+    /*
+     * 'n' is a lab number if a prime divisor of n, say 'a', squared is also a divisor of n.
+     * Example: 3 is a divisor of 18. 3^2 = 9 is also a divisor of 18
+     */
+    fun labNumber(n: Long): Boolean {
+        TODO()
+    }
+
+    fun allPrimeFactors(n: Long, includeOne: Boolean = false): List<Long> {
+        val factors = mutableListOf<Long>()
+        if (includeOne) {
+            factors.add(1)
+        }
+
+        tailrec fun go(i: Long, n: Long, factors: List<Long>): List<Long> {
+            return when {
+                i > n -> factors
+                n % i == 0L -> go(i, n / i, factors + i)
+                else -> go(i + 1, n, factors)
+            }
+        }
+
+        return go(2, n, factors)
+    }
+
+
     /**
      * Alle faktorene (inkludert 1) som tall er delelig på, men ikke tallet selv.
      */
@@ -72,4 +99,18 @@ object KMathLib {
         return false
     }
 
+
+    fun factorial(n: Int): Long {
+        fun go(i: Int, product: Long): Long {
+            return when {
+                i >= n -> n * product
+                else -> go(i + 1, i * product)
+            }
+        }
+        return when (n) {
+            0 -> 1
+            1 -> 1
+            else -> go(2, 1)
+        }
+    }
 }
