@@ -12,7 +12,7 @@
         <scala-major.version>2.12</scala-major.version>
         <scalatest.version>3.0.1</scalatest.version>
         <slf4j.version>1.7.21</slf4j.version>
-        <junit.version>4.12</junit.version>
+        <junit.version>4.13.1</junit.version>
         <mockito.version>2.13.0</mockito.version>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
