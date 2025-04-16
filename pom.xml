@@ -7,7 +7,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <kotlin.version>1.3.41</kotlin.version>
+        <kotlin.version>2.1.0</kotlin.version>
         <scala.version>2.12.4</scala.version>
         <scala-major.version>2.12</scala-major.version>
         <scalatest.version>3.0.1</scalatest.version>
@@ -19,19 +19,17 @@
     </properties>
 
     <dependencies>
+        <!--
         <dependency>
             <groupId>org.scalatest</groupId>
             <artifactId>scalatest_${scala-major.version}</artifactId>
             <scope>test</scope>
         </dependency>
+        -->
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
             <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.scala-lang</groupId>
-            <artifactId>scala-library</artifactId>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
@@ -53,13 +51,19 @@
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
             <artifactId>kotlin-test</artifactId>
-            <scope>test</scope>
+          <version>${kotlin.version}</version>
+          <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
             <artifactId>kotlin-test-junit</artifactId>
             <scope>test</scope>
         </dependency>
+      <dependency>
+        <groupId>org.jetbrains.kotlin</groupId>
+        <artifactId>kotlin-stdlib-jdk8</artifactId>
+        <version>${kotlin.version}</version>
+      </dependency>
     </dependencies>
 
     <dependencyManagement>
@@ -80,16 +84,6 @@
                 <version>${kotlin.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.scala-lang</groupId>
-                <artifactId>scala-library</artifactId>
-                <version>${scala.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.scalatest</groupId>
-                <artifactId>scalatest_${scala-major.version}</artifactId>
-                <version>${scalatest.version}</version>
-            </dependency>
-            <dependency>
                 <groupId>org.mockito</groupId>
                 <artifactId>mockito-core</artifactId>
                 <version>${mockito.version}</version>
@@ -108,7 +102,9 @@
     </dependencyManagement>
 
     <build>
-        <plugins>
+      <sourceDirectory>src/main/kotlin</sourceDirectory>
+      <testSourceDirectory>src/test/kotlin</testSourceDirectory>
+      <plugins>
             <plugin>
                 <groupId>org.jetbrains.kotlin</groupId>
                 <artifactId>kotlin-maven-plugin</artifactId>
@@ -116,76 +112,37 @@
                 <executions>
                     <execution>
                         <id>compile</id>
-                        <goals> <goal>compile</goal> </goals>
-                        <configuration>
-                            <sourceDirs>
-                                <sourceDir>${project.basedir}/src/main/kotlin</sourceDir>
-                                <sourceDir>${project.basedir}/src/main/java</sourceDir>
-                            </sourceDirs>
-                        </configuration>
+                      <phase>compile</phase>
+                      <goals> <goal>compile</goal> </goals>
                     </execution>
                     <execution>
                         <id>test-compile</id>
-                        <goals> <goal>test-compile</goal> </goals>
-                        <configuration>
-                            <sourceDirs>
-                                <sourceDir>${project.basedir}/src/test/kotlin</sourceDir>
-                                <sourceDir>${project.basedir}/src/test/java</sourceDir>
-                            </sourceDirs>
-                        </configuration>
+                      <phase>test-compile</phase>
+                      <goals> <goal>test-compile</goal> </goals>
                     </execution>
                 </executions>
+              <configuration>
+                <jvmTarget>${maven.compiler.target}</jvmTarget>
+              </configuration>
             </plugin>
 
             <plugin>
-                <groupId>net.alchim31.maven</groupId>
-                <artifactId>scala-maven-plugin</artifactId>
-                <version>3.2.2</version>
-                <executions>
-                    <execution>
-                        <id>scala-compile-first</id>
-                        <phase>process-resources</phase>
-                        <goals>
-                            <goal>add-source</goal>
-                            <goal>compile</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>scala-test-compile</id>
-                        <phase>process-test-resources</phase>
-                        <goals>
-                            <goal>testCompile</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>            <!-- disable surefire -->
-            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.7</version>
+                <version>3.5.2</version>
                 <configuration>
                     <skipTests>false</skipTests>
                 </configuration>
             </plugin>
-            <!-- enable scalatest -->
-            <plugin>
-                <groupId>org.scalatest</groupId>
-                <artifactId>scalatest-maven-plugin</artifactId>
-                <version>1.0</version>
-                <configuration>
-                    <reportsDirectory>${project.build.directory}/surefire-reports</reportsDirectory>
-                    <junitxml>.</junitxml>
-                    <filereports>WDF TestSuite.txt</filereports>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>test</id>
-                        <goals>
-                            <goal>test</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
+          <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-compiler-plugin</artifactId>
+              <configuration>
+                  <source>9</source>
+                  <target>9</target>
+              </configuration>
+          </plugin>
+          <!-- enable scalatest -->
         </plugins>
     </build>
 </project>

@@ -22,7 +22,17 @@ object KMathLib {
             i += 1
         } while (i <= max)
         return factors.sorted()
-                .toSet()
+            .toSet()
+    }
+
+    /**
+     * Alle primtallsfaktorer av n.
+     * Inkluderer ikke 1. Inkluderer n hvis n er primtall.
+     */
+    fun primtallsfaktorerAvN(n: Long): Set<Long> {
+        return properDivisors(n).minus(1).plus(n)
+            .filter { isPrimeFast(it) }
+            .toSet()
     }
 
     fun noCommonDivisor(a: Long, b: Long): Boolean {
@@ -37,9 +47,9 @@ object KMathLib {
         return n1 == 1L
     }
 
-    fun allPrimesInRange(primeMax: Int) : List<Int> {
-        return (2 .. primeMax)
-                .filter {isPrimeFast(it.toLong()) }
+    fun allPrimesInRange(primeMax: Int): List<Int> {
+        return (2..primeMax)
+            .filter { isPrimeFast(it.toLong()) }
     }
 
     fun isPrimeFast(tall: Long): Boolean {

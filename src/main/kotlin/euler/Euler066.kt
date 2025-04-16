@@ -39,12 +39,13 @@ object Euler066 {
 
     fun bigInteger() {
         var stoerste: Pair<Long, Long> = Pair(0, 0)
-        (2L..1000L).filterNot { it.isSquare() }
+        (61L..1000L).filterNot { it.isSquare() }
             .forEach { d ->
-                for (x in 2L..Long.MAX_VALUE) {
+                val bigD = BigInteger("$d")
+                for (x in 1766319048L..Long.MAX_VALUE) {
+                    //println("d: $d, x: $x")
                     assert(x * x > 0) { "Overflow for d: $d, x: $x" }
                     val bigXm1 = BigInteger("${x * x - 1}")
-                    val bigD = BigInteger("$d")
                     if (bigXm1.mod(bigD) == BigInteger.ZERO) {
                         val yBigSq = bigXm1.div(bigD)
                         if (yBigSq.isSquare()) {
