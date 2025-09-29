@@ -51,10 +51,10 @@ interface ScoreDetector {
 
 class HighestHandDetector : ScoreDetector {
     override fun detect(hand: Hand): Score? {
-        val uniqueValues = hand.cards.map { it.valor }.toSet()
+        val uniqueValues: Set<Int> = hand.cards.map { it.valor }.toSet()
         val uniqueSuits = hand.cards.map { it.suit }.toSet()
-        val highestValue = uniqueValues.sortedDescending().first()
-        if( uniqueValues.max()!! - uniqueValues.min()!! + 1 == 5){
+        val highestValue: Int = uniqueValues.sortedDescending().first()
+        if( uniqueValues.maxOrNull()!! - uniqueValues.minOrNull()!! + 1 == 5){
             //straight
             return null
         }
@@ -79,7 +79,7 @@ class OnePairDetector : ScoreDetector {
                 .first()
         val rest: List<Int> = hand.cards.filterNot { it.valor == value }.map { it.valor }
 /*
-        if (rest.max()!! - rest.min()!! + 1 == 5) {
+        if (rest.maxOrNull()!! - rest.minOrNull()!! + 1 == 5) {
             return null
         }
 */
@@ -135,14 +135,14 @@ class StraightsDetector : ScoreDetector {
             return null
         }
         val rest = hand.cards.map { it.valor }
-        if (rest.max()!! - rest.min()!! + 1 != 5) {
+        if (rest.maxOrNull()!! - rest.minOrNull()!! + 1 != 5) {
             return null
         }
         if (grouped.keys.size == 1) {
-            if (rest.max() == 14) return Score("RoyalStraightFlush", 14, emptyList(), 10)
-            else return Score("StraightFlush", rest.max()!!, emptyList(), 9)
+            if (rest.maxOrNull() == 14) return Score("RoyalStraightFlush", 14, emptyList(), 10)
+            else return Score("StraightFlush", rest.maxOrNull()!!, emptyList(), 9)
         } else {
-            return Score("Straight", rest.max()!!, emptyList(), 5)
+            return Score("Straight", rest.maxOrNull()!!, emptyList(), 5)
         }
     }
 }
@@ -153,8 +153,8 @@ class FlushDetector : ScoreDetector {
         if (uniqueSuits.size != 1) {
             return null
         }
-        val lowest: Int = hand.cards.map { it.valor }.min()!!
-        val highest: Int = hand.cards.map { it.valor }.max()!!
+        val lowest: Int = hand.cards.map { it.valor }.minOrNull()!!
+        val highest: Int = hand.cards.map { it.valor }.maxOrNull()!!
         if( highest - lowest + 1 == 5 ){
             return null //straight flush
         } else {
@@ -169,7 +169,7 @@ class FullHouseDetector : ScoreDetector {
         if (grouped.keys.size == 2
                 && grouped.entries.any { it.value.size == 2 }
                 && grouped.entries.any { it.value.size == 3 }) {
-            val max = hand.cards.map { it.valor }.max()!!
+            val max = hand.cards.map { it.valor }.maxOrNull()!!
             return Score("FullHouse", max, emptyList(), 7)
 
         } else {

@@ -47,7 +47,7 @@ class Euler0054Test {
         assert("OnePair" == score?.name)
         assert(8 == score?.value)
         assert(2 == score?.rank)
-        assert(10 == score?.nextHighest?.max())
+        assert(10 == score?.nextHighest?.maxOrNull())
     }
 
     @Test
@@ -58,7 +58,7 @@ class Euler0054Test {
         assert("TwoPairs" == score?.name)
         assert(10 == score?.value)
         assert(3 == score?.rank)
-        assert(2 == score?.nextHighest?.max())
+        assert(2 == score?.nextHighest?.maxOrNull())
     }
 
     @Test
@@ -69,7 +69,7 @@ class Euler0054Test {
         assert("ThreeOfAKind" == score?.name)
         assert(14 == score?.value)
         assert(4 == score?.rank)
-        assert(9 == score?.nextHighest?.max())
+        assert(9 == score?.nextHighest?.maxOrNull())
     }
 
     @Test

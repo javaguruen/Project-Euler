@@ -3,6 +3,8 @@ package euler
 import kotlin.math.ceil
 import kotlin.math.sqrt
 
+fun Int.cubed() = this * this * this
+
 object KMathLib {
 
     /*
@@ -13,6 +15,31 @@ object KMathLib {
         TODO()
     }
 
+    @JvmStatic
+    fun triangleNumber(n: Int): Int{
+        return n * (n + 1) / 2
+    }
+
+    fun squareNumber(n: Int): Int{
+        return n * n
+    }
+
+    fun pentagonalNumber(n: Int): Int{
+        return n * (3*n - 1) / 2
+    }
+
+    fun hexagonalNumber(n: Int): Int{
+        return n * (2*n - 1)
+    }
+
+    fun heptagonalNumber(n: Int): Int{
+        return n * (5*n - 3)/2
+    }
+
+    fun octagonalNumber(n: Int): Int{
+        return n * (3*n - 2)
+    }
+
     fun allPrimeFactors(n: Long, includeOne: Boolean = false): List<Long> {
         val factors = mutableListOf<Long>()
         if (includeOne) {
@@ -21,9 +48,26 @@ object KMathLib {
 
         tailrec fun go(i: Long, n: Long, factors: List<Long>): List<Long> {
             return when {
-                i > n -> factors
+                i > Math.ceil(sqrt(n.toDouble())).toLong() -> factors + n
                 n % i == 0L -> go(i, n / i, factors + i)
-                else -> go(i + 1, n, factors)
+                else -> go(if(i == 2L) 3L else  i + 2, n, factors)
+            }
+        }
+
+        return go(2, n, factors)
+    }
+
+    fun allPrimeFactors(n: Long, primes: List<Long>, includeOne: Boolean = false): List<Long> {
+        val factors = mutableListOf<Long>()
+        if (includeOne) {
+            factors.add(1)
+        }
+
+        tailrec fun go(i: Long, n: Long, factors: List<Long>): List<Long> {
+            return when {
+                i > Math.ceil(sqrt(n.toDouble())).toLong() -> factors + n
+                n % i == 0L -> go(i, n / i, factors + i)
+                else -> go(if(i == 2L) 3L else  i + 2, n, factors)
             }
         }
 
@@ -77,6 +121,11 @@ object KMathLib {
     fun allPrimesInRange(primeMax: Int): List<Int> {
         return (2..primeMax)
             .filter { isPrimeFast(it.toLong()) }
+    }
+
+    fun allPrimesInLongRange(primeMax: Long): List<Long> {
+        return (2L .. primeMax)
+                .filter { isPrimeFast(it) }
     }
 
     fun isPrimeFast(tall: Long): Boolean {

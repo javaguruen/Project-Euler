@@ -3,7 +3,7 @@ package euler
 import org.scalatest.FunSuite
 import org.slf4j.{Logger, LoggerFactory}
 
-class Euler0243Test extends FunSuite{
+class Euler243Test extends FunSuite{
   val logger: Logger = LoggerFactory.getLogger("Euler243")
 
   test("isResilience12"){
